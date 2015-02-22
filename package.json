@@ -1,0 +1,25 @@
+{
+  "name": "metalsmith-prism",
+  "version": "1.0.0",
+  "description": "Syntax highlighting for Metalsmith HTML templates using Prism.js",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Availity/metalsmith-prism.git"
+  },
+  "keywords": [
+    "metalsmith",
+    "prismjs",
+    "syntax",
+    "highlighting"
+  ],
+  "author": "Robert McGuinness <rob.mcguinness@availity.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Availity/metalsmith-prism/issues"
+  },
+  "homepage": "https://github.com/Availity/metalsmith-prism"
+}

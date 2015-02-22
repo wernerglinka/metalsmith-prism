@@ -1,2 +1,3 @@
 # metalsmith-prism
-Syntax highlighting for Metalsmith using Prism.js
+
+> Syntax highlighting for [Metalsmith](http://www.metalsmith.io/) using Prism.js

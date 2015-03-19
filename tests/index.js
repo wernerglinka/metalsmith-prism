@@ -3,7 +3,6 @@
 var chai = require('chai');
 var metalsmith = require('metalsmith');
 var metalsmithPrism = require('../lib');
-var cheerio = require('cheerio');
 var fs = require('fs');
 var path = require('path');
 var expect = chai.expect;

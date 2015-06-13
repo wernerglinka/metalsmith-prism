@@ -28,7 +28,7 @@
 
 >
 ``` js
-var metalsmith = require('metlasmith');
+var metalsmith = require('metalsmith');
 var metalsmithPrism = require('metalsmith-prism');
 metalsmith(__dirname)
   .use(metalsmithPrism())

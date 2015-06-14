@@ -9,6 +9,10 @@ var path = require('path');
 var expect = chai.expect;
 var fixture = path.resolve.bind(path, __dirname, 'fixtures');
 
+function fixtureContent(path) {
+  return fs.readFileSync(fixture(path), 'utf8');
+};
+
 describe('metalsmith-prism', function() {
 
   it('should highlight code blocks in html files', function(done) {
@@ -23,8 +27,8 @@ describe('metalsmith-prism', function() {
           return done(err);
         }
 
-        var buildContent = fs.readFileSync(fixture('markup/build/markup.html'), "utf8");
-        var expectedContent  = fs.readFileSync(fixture('markup/expected/markup.html'), "utf8");
+        var buildContent = fixtureContent('markup/build/markup.html');
+        var expectedContent  = fixtureContent('markup/expected/markup.html');
 
         expect(buildContent).to.be.eql(expectedContent);
 
@@ -44,8 +48,8 @@ describe('metalsmith-prism', function() {
           return done(err);
         }
 
-        var buildContent = fs.readFileSync(fixture('multiple/build/multiple.html'), "utf8");
-        var expectedContent  = fs.readFileSync(fixture('multiple/expected/multiple.html'), "utf8");
+        var buildContent = fixtureContent('multiple/build/multiple.html');
+        var expectedContent  = fixtureContent('multiple/expected/multiple.html');
 
         expect(buildContent).to.be.eql(expectedContent);
 

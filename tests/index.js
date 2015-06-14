@@ -3,7 +3,6 @@
 var chai = require('chai');
 var metalsmith = require('metalsmith');
 var metalsmithPrism = require('../lib');
-var cheerio = require('cheerio');
 var fs = require('fs');
 var path = require('path');
 var expect = chai.expect;
@@ -11,7 +10,7 @@ var fixture = path.resolve.bind(path, __dirname, 'fixtures');
 
 function fixtureContent(path) {
   return fs.readFileSync(fixture(path), 'utf8');
-};
+}
 
 describe('metalsmith-prism', function() {
 

@@ -35,6 +35,20 @@ metalsmith(__dirname)
   .build();
 ```
 
++ [OPTIONAL] To use with Markdown code blocks rendered by [metalsmith-markdown](https://github.com/segmentio/metalsmith-markdown)
+
+>
+``` js
+var metalsmith = require('metalsmith');
+var markdown = require('metalsmith-markdown');
+var metalsmithPrism = require('metalsmith-prism');
+metalsmith(__dirname)
+  // Custom langPrefix option needed as markdown uses 'lang-' by default:
+  .use(markdown( { langPrefix: 'language-' } ))
+  .use(metalsmithPrism())
+  .build();
+```
+
 ## API
 
 JSON syntax highlighting is enhanced using the following syntax definition

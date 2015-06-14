@@ -30,4 +30,26 @@ describe('metalsmith-prism', function() {
         done();
       });
   });
+
+  it ('should highlight multiple languages', function(done) {
+
+    var metal = metalsmith(path.join(__dirname, 'fixtures'));
+
+    metal
+      .use(metalsmithPrism())
+      .build(function(err){
+
+        if(err) {
+          return done(err);
+        }
+
+        var buildContent = fs.readFileSync(path.join(__dirname, 'fixtures/build/multiple.html'), "utf8");
+        var expectedContent  = fs.readFileSync(path.join(__dirname, 'fixtures/expected/multiple.html'), "utf8");
+
+        expect(buildContent).to.be.eql(expectedContent);
+
+        done();
+      });
+
+  });
 });

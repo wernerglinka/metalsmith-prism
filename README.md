@@ -2,7 +2,7 @@
 
 > Syntax highlighting for [Metalsmith](http://www.metalsmith.io/) HTML templates using [Prism.js](http://prismjs.com/)
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=windows)](http://opensource.org/licenses/MIT)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license)](http://opensource.org/licenses/MIT)
 [![NPM](http://img.shields.io/npm/v/metalsmith-prism.svg?style=flat-square&label=npm)](https://npmjs.org/package/metalsmith-prism)
 [![Dependency Status](https://img.shields.io/david/Availity/metalsmith-prism.svg?style=flat-square)](https://david-dm.org/Availity/metalsmith-prism)
 [![Linux Passing](https://img.shields.io/travis/Availity/metalsmith-prism.svg?style=flat-square&label=linux)](https://travis-ci.org/Availity/metalsmith-prism)
@@ -35,6 +35,20 @@ metalsmith(__dirname)
   .build();
 ```
 
++ [OPTIONAL] To use with Markdown code blocks rendered by [metalsmith-markdown](https://github.com/segmentio/metalsmith-markdown)
+
+>
+``` js
+var metalsmith = require('metalsmith');
+var markdown = require('metalsmith-markdown');
+var metalsmithPrism = require('metalsmith-prism');
+metalsmith(__dirname)
+  // Custom langPrefix option needed as markdown uses 'lang-' by default:
+  .use(markdown( { langPrefix: 'language-' } ))
+  .use(metalsmithPrism())
+  .build();
+```
+
 ## API
 
 JSON syntax highlighting is enhanced using the following syntax definition
@@ -48,6 +62,11 @@ Prism.languages.json = {
   'keyword': /\b(null)\b/g
 }
 ```
+
+## Language support
+
+Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components).
+
 
 ## Authors
 

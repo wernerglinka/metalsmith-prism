@@ -35,7 +35,7 @@ metalsmith(__dirname)
   .build();
 ```
 
-+ [OPTIONAL] To use with Markdown code blocks rendered by [metalsmith-markdown](https://github.com/segmentio/metalsmith-markdown)
++ _OPTIONAL_ To use with Markdown code blocks rendered by [metalsmith-markdown](https://github.com/segmentio/metalsmith-markdown)
 
 >
 ``` js
@@ -51,9 +51,11 @@ metalsmith(__dirname)
 
 ## Language support
 
-Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components).
+Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components). 
 
-> JSON syntax highlighting is enhanced using the following syntax definition
+### JSON 
+
+JSON syntax highlighting is enhanced using the following syntax definition
 
 >
 ``` js

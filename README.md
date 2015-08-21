@@ -49,9 +49,11 @@ metalsmith(__dirname)
   .build();
 ```
 
-## API
+## Language support
 
-JSON syntax highlighting is enhanced using the following syntax definition
+Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components).
+
+> JSON syntax highlighting is enhanced using the following syntax definition
 
 >
 ``` js
@@ -62,16 +64,14 @@ Prism.languages.json = {
   'keyword': /\b(null)\b/g
 }
 ```
-
-### Options
-
-Options are optional.
-
-* **json**: JSON highlighting definition for Prism.
-
-## Language support
-
-Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components).
+>
+```html
+<code class="language-json">
+{
+    ping: "pong"
+}
+</code>
+```
 
 
 ## Authors

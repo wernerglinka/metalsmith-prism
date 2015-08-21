@@ -63,6 +63,12 @@ Prism.languages.json = {
 }
 ```
 
+### Options
+
+Options are optional.
+
+* **json**: JSON highlighting definition for Prism.
+
 ## Language support
 
 Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components).

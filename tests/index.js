@@ -36,4 +36,22 @@ describe('metalsmith-prism', function() {
       });
 
   });
+
+  it ('should not highlight unknown language code blocks', function(done) {
+
+    var metal = metalsmith(fixture());
+
+    metal
+      .use(metalsmithPrism())
+      .build(function(err){
+
+        if(err) {
+          return done(err);
+        }
+
+        expect(file('build/unknown.html')).to.be.eql(file('expected/unknown.html'));
+
+        done();
+      });
+  });
 });

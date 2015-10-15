@@ -55,7 +55,7 @@ describe('metalsmith-prism', function() {
       });
   });
 
-  it('should decode encoded markup blocks', function(done) {
+  it('should decode markup blocks when options#decode is true', function(done) {
 
     var metal = metalsmith(fixture());
 

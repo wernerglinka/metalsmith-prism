@@ -9,21 +9,21 @@ var expect = chai.expect;
 
 var fixture = path.resolve.bind(path, __dirname, 'fixtures/markup');
 
-function file(path) {
-  return fs.readFileSync(fixture(path), 'utf8');
+function file(_path) {
+  return fs.readFileSync(fixture(_path), 'utf8');
 }
 
 describe('metalsmith-prism', function() {
 
-  it ('should highlight code blocks', function(done) {
+  it('should highlight code blocks', function(done) {
 
     var metal = metalsmith(fixture());
 
     metal
       .use(metalsmithPrism())
-      .build(function(err){
+      .build(function(err) {
 
-        if(err) {
+        if (err) {
           return done(err);
         }
 
@@ -37,15 +37,15 @@ describe('metalsmith-prism', function() {
 
   });
 
-  it ('should not highlight unknown language code blocks', function(done) {
+  it('should not highlight unknown language code blocks', function(done) {
 
     var metal = metalsmith(fixture());
 
     metal
       .use(metalsmithPrism())
-      .build(function(err){
+      .build(function(err) {
 
-        if(err) {
+        if (err) {
           return done(err);
         }
 

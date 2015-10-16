@@ -75,6 +75,36 @@ Prism.languages.json = {
 </code>
 ```
 
+### Options
+
+#### decode (optional)
+
+- Always decode the html entities when processing language of type `markup`
+
+```javascript
+Metalsmith(__dirname)
+  .use(metalsmithPrism({
+    decode: true
+  }))
+```
+
+#### json (optional)
+
+- Supply custom JSON syntax definition
+
+```javascript
+Metalsmith(__dirname)
+  .use(metalsmithPrism({
+    json: {
+      'keys': /".+"(?=:)/g,
+      'boolean': /\b(true|false)/g,
+      'punctuation': /({|}|:|\[|\]|,)/g,
+      'keyword': /\b(null)\b/g
+    }
+  }))
+```
+
+
 
 ## Authors
 

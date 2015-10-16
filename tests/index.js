@@ -54,4 +54,25 @@ describe('metalsmith-prism', function() {
         done();
       });
   });
+
+  it('should decode markup blocks when options#decode is true', function(done) {
+
+    var metal = metalsmith(fixture());
+
+    metal
+      .use(metalsmithPrism({
+        decode: true
+      }))
+      .build(function(err) {
+
+        if (err) {
+          return done(err);
+        }
+
+        expect(file('build/markup-encoded.html')).to.be.eql(file('expected/markup-encoded.html'));
+
+        done();
+      });
+
+  });
 });

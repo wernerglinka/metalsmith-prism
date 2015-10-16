@@ -4,6 +4,7 @@
   "description": "Syntax highlighting for Metalsmith HTML templates using Prism.js",
   "main": "lib/index.js",
   "scripts": {
+    "preversion": "npm test",
     "test": "node_modules/.bin/mocha ./tests/index.js",
     "lint": "eslint ./lib ./tests"
   },

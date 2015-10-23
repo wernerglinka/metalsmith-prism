@@ -15,7 +15,7 @@ function file(_path) {
 
 describe('metalsmith-prism', function() {
 
-  it('should highlight code blocks', function(done) {
+  it('should highlight code blocks for json, markup, ruby and bash', function(done) {
 
     var metal = metalsmith(fixture());
 
@@ -37,7 +37,7 @@ describe('metalsmith-prism', function() {
 
   });
 
-  it('should not highlight unknown language code blocks', function(done) {
+  it('should NOT highlight unknown language code blocks', function(done) {
 
     var metal = metalsmith(fixture());
 

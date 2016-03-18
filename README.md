@@ -106,7 +106,7 @@ Metalsmith(__dirname)
 
 #### lineNumbers (optional)
 
-- Supply line-numbers class on pre tag
+- Appends class `line-numbers` to parent `<pre>` tag if present
 
 ```javascript
 Metalsmith(__dirname)

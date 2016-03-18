@@ -76,7 +76,7 @@ describe('metalsmith-prism', function() {
 
   });
 
-  it('should add line numbers class when options#lineNumbers is true', function(done) {
+  it('should add line numbers class to <pre> tag when options#lineNumbers is true', function(done) {
 
     var metal = metalsmith(fixture());
 

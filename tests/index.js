@@ -97,24 +97,4 @@ describe('metalsmith-prism', function() {
 
   });
 
-  it('should add line numbers class when options#lineNumbers is true and parent class is <pre>', function(done) {
-
-    var metal = metalsmith(fixture());
-
-    metal
-      .use(metalsmithPrism({
-        lineNumbers: true
-      }))
-      .build(function(err) {
-
-        if (err) {
-          return done(err);
-        }
-
-        expect(file('build/line-numbers-with-parent.html')).to.be.eql(file('expected/line-numbers-with-parent.html'));
-
-        done();
-      });
-
-  });
 });

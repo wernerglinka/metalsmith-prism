@@ -104,6 +104,17 @@ Metalsmith(__dirname)
   }))
 ```
 
+#### lineNumbers (optional)
+
+- Supply line-numbers class on pre tag
+
+```javascript
+Metalsmith(__dirname)
+  .use(metalsmithPrism({
+    lineNumbers: true
+  }))
+```
+
 
 
 ## Authors

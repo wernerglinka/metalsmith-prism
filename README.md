@@ -10,24 +10,24 @@
 
 ## Quickstart
 
-+ Install **metalsmith-prism** with npm
++ Install **metalsmith-prism**
 
 >
-``` bash
+```bash
   npm install metalsmith-prism --save-dev
 ```
 
 + Add language definition to code block
 
 >
-``` html
+```html
 <code class="language-css">p { color: red }</code>
 ```
 
 + Add `metalsmith-prism` plugin to metalsmith
 
 >
-``` js
+```js
 var metalsmith = require('metalsmith');
 var metalsmithPrism = require('metalsmith-prism');
 metalsmith(__dirname)
@@ -35,10 +35,10 @@ metalsmith(__dirname)
   .build();
 ```
 
-+ _OPTIONAL_ To use with Markdown code blocks rendered by [metalsmith-markdown](https://github.com/segmentio/metalsmith-markdown)
++ **_OPTIONAL_** To use with Markdown code blocks rendered by [metalsmith-markdown](https://github.com/segmentio/metalsmith-markdown)
 
 >
-``` js
+```js
 var metalsmith = require('metalsmith');
 var markdown = require('metalsmith-markdown');
 var metalsmithPrism = require('metalsmith-prism');
@@ -58,7 +58,7 @@ Supports all programming languages that have a corresponding Prism.js component 
 JSON syntax highlighting is enhanced using the following syntax definition
 
 >
-``` js
+```javascript
 Prism.languages.json = {
   'keys': /".+"(?=:)/g,
   'boolean': /\b(true|false)/g,
@@ -128,7 +128,7 @@ Open source software components distributed or made available in the Availity Ma
 
 ## Copyright and license
 
-Code and documentation copyright 2015 Availity, LLC. Code released under [the MIT license](https://github.com/Availity/metalsmith-prism/blob/master/LICENSE).
+Code and documentation copyright 2016 Availity, LLC. Code released under [the MIT license](https://github.com/Availity/metalsmith-prism/blob/master/LICENSE).
 
 
 

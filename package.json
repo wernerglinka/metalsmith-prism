@@ -1,6 +1,6 @@
 {
   "name": "metalsmith-prism",
-  "version": "2.2.0",
+  "version": "2.1.1",
   "description": "Syntax highlighting for Metalsmith HTML templates using Prism.js",
   "main": "lib/index.js",
   "scripts": {

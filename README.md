@@ -8,6 +8,11 @@
 [![Linux Passing](https://img.shields.io/travis/Availity/metalsmith-prism.svg?style=flat-square&label=linux)](https://travis-ci.org/Availity/metalsmith-prism)
 [![Windows Passing](https://img.shields.io/appveyor/ci/robmcguinness/metalsmith-prism.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/robmcguinness/metalsmith-prism)
 
+## Upgrading to version 3
+
++ Node dependency to `>=4.x.x` 
++ Metalsmith to `=>v2.x.x`  
+
 ## Quickstart
 
 + Install **metalsmith-prism**

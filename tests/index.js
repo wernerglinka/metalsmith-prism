@@ -78,6 +78,25 @@ describe('metalsmith-prism', () => {
 
   });
 
+  it('should add language class to <pre> tag', function(done) {
+
+    const metal = metalsmith(fixture());
+
+    metal
+      .use(metalsmithPrism())
+      .build( err => {
+
+        if (err) {
+          return done(err);
+        }
+
+        expect(file('build/line-numbers.html')).to.be.eql(file('expected/pre-classname.html'));
+
+        done();
+      });
+
+  });
+
   it('should add line numbers class to <pre> tag when options#lineNumbers is true', function(done) {
 
     const metal = metalsmith(fixture());

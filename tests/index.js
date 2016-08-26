@@ -1,27 +1,29 @@
 /* global describe, it */
 
-var chai = require('chai');
-var metalsmith = require('metalsmith');
-var metalsmithPrism = require('../lib');
-var fs = require('fs');
-var path = require('path');
-var expect = chai.expect;
+'use strict';
 
-var fixture = path.resolve.bind(path, __dirname, 'fixtures/markup');
+const chai = require('chai');
+const metalsmith = require('metalsmith');
+const metalsmithPrism = require('../lib');
+const fs = require('fs');
+const path = require('path');
+const expect = chai.expect;
+
+const fixture = path.resolve.bind(path, __dirname, 'fixtures/markup');
 
 function file(_path) {
   return fs.readFileSync(fixture(_path), 'utf8');
 }
 
-describe('metalsmith-prism', function() {
+describe('metalsmith-prism', () => {
 
-  it('should highlight code blocks for json, markup, ruby and bash', function(done) {
+  it('should highlight code blocks for json, markup, ruby and bash', done => {
 
-    var metal = metalsmith(fixture());
+    const metal = metalsmith(fixture());
 
     metal
       .use(metalsmithPrism())
-      .build(function(err) {
+      .build( err => {
 
         if (err) {
           return done(err);
@@ -37,13 +39,13 @@ describe('metalsmith-prism', function() {
 
   });
 
-  it('should NOT highlight unknown language code blocks', function(done) {
+  it('should NOT highlight unknown language code blocks', done => {
 
-    var metal = metalsmith(fixture());
+    const metal = metalsmith(fixture());
 
     metal
       .use(metalsmithPrism())
-      .build(function(err) {
+      .build( err => {
 
         if (err) {
           return done(err);
@@ -57,13 +59,13 @@ describe('metalsmith-prism', function() {
 
   it('should decode markup blocks when options#decode is true', function(done) {
 
-    var metal = metalsmith(fixture());
+    const metal = metalsmith(fixture());
 
     metal
       .use(metalsmithPrism({
         decode: true
       }))
-      .build(function(err) {
+      .build( err => {
 
         if (err) {
           return done(err);
@@ -76,15 +78,34 @@ describe('metalsmith-prism', function() {
 
   });
 
+  it('should add language class to <pre> tag', function(done) {
+
+    const metal = metalsmith(fixture());
+
+    metal
+      .use(metalsmithPrism())
+      .build( err => {
+
+        if (err) {
+          return done(err);
+        }
+
+        expect(file('build/line-numbers.html')).to.be.eql(file('expected/pre-classname.html'));
+
+        done();
+      });
+
+  });
+
   it('should add line numbers class to <pre> tag when options#lineNumbers is true', function(done) {
 
-    var metal = metalsmith(fixture());
+    const metal = metalsmith(fixture());
 
     metal
       .use(metalsmithPrism({
         lineNumbers: true
       }))
-      .build(function(err) {
+      .build( err => {
 
         if (err) {
           return done(err);

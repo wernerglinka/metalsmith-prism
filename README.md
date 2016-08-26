@@ -58,28 +58,6 @@ metalsmith(__dirname)
 
 Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components). 
 
-### JSON 
-
-JSON syntax highlighting is enhanced using the following syntax definition
-
->
-```javascript
-Prism.languages.json = {
-  'keys': /".+"(?=:)/g,
-  'boolean': /\b(true|false)/g,
-  'punctuation': /({|}|:|\[|\]|,)/g,
-  'keyword': /\b(null)\b/g
-}
-```
->
-```html
-<code class="language-json">
-{
-    ping: "pong"
-}
-</code>
-```
-
 ### Options
 
 #### decode (optional)
@@ -93,22 +71,6 @@ Metalsmith(__dirname)
   }))
 ```
 
-#### json (optional)
-
-- Supply custom JSON syntax definition
-
-```javascript
-Metalsmith(__dirname)
-  .use(metalsmithPrism({
-    json: {
-      'keys': /".+"(?=:)/g,
-      'boolean': /\b(true|false)/g,
-      'punctuation': /({|}|:|\[|\]|,)/g,
-      'keyword': /\b(null)\b/g
-    }
-  }))
-```
-
 #### lineNumbers (optional)
 
 - Appends class `line-numbers` to parent `<pre>` tag if present
@@ -119,8 +81,6 @@ Metalsmith(__dirname)
     lineNumbers: true
   }))
 ```
-
-
 
 ## Authors
 

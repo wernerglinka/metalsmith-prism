@@ -21,6 +21,10 @@
     "syntax",
     "highlighting"
   ],
+  "files": [
+    "lib",
+    "README.md"
+  ],
   "author": "Robert McGuinness <rob.mcguinness@availity.com>",
   "license": "MIT",
   "bugs": {

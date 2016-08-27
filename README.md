@@ -8,33 +8,32 @@
 [![Linux Passing](https://img.shields.io/travis/Availity/metalsmith-prism.svg?style=flat-square&label=linux)](https://travis-ci.org/Availity/metalsmith-prism)
 [![Windows Passing](https://img.shields.io/appveyor/ci/robmcguinness/metalsmith-prism.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/robmcguinness/metalsmith-prism)
 
-## Upgrading to version 3
+## Requirements
 
-+ Node dependency to `>=4.x.x` 
-+ Metalsmith to `=>v2.x.x`  
++ Node dependency `>=4.x.x`
++ NPM `>=v3.x.x`
++ Metalsmith `=>v2.x.x`
 
 ## Quickstart
 
 + Install **metalsmith-prism**
 
->
 ```bash
   npm install metalsmith-prism --save-dev
 ```
 
 + Add language definition to code block
 
->
 ```html
 <code class="language-css">p { color: red }</code>
 ```
 
 + Add `metalsmith-prism` plugin to metalsmith
 
->
 ```js
-var metalsmith = require('metalsmith');
-var metalsmithPrism = require('metalsmith-prism');
+const metalsmith = require('metalsmith');
+const metalsmithPrism = require('metalsmith-prism');
+
 metalsmith(__dirname)
   .use(metalsmithPrism())
   .build();
@@ -42,11 +41,11 @@ metalsmith(__dirname)
 
 + **_OPTIONAL_** To use with Markdown code blocks rendered by [metalsmith-markdown](https://github.com/segmentio/metalsmith-markdown)
 
->
 ```js
-var metalsmith = require('metalsmith');
-var markdown = require('metalsmith-markdown');
-var metalsmithPrism = require('metalsmith-prism');
+const metalsmith = require('metalsmith');
+const markdown = require('metalsmith-markdown');
+const metalsmithPrism = require('metalsmith-prism');
+
 metalsmith(__dirname)
   // Custom langPrefix option needed as markdown uses 'lang-' by default:
   .use(markdown( { langPrefix: 'language-' } ))
@@ -56,7 +55,7 @@ metalsmith(__dirname)
 
 ## Language support
 
-Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components). 
+Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components).
 
 ### Options
 
@@ -64,7 +63,7 @@ Supports all programming languages that have a corresponding Prism.js component 
 
 - Always decode the html entities when processing language of type `markup`
 
-```javascript
+```js
 Metalsmith(__dirname)
   .use(metalsmithPrism({
     decode: true

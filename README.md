@@ -10,7 +10,7 @@
 
 ## Requirements
 
-+ Node dependency `>=4.x.x`
++ Node `>=4.x.x`
 + NPM `>=v3.x.x`
 + Metalsmith `=>v2.x.x`
 

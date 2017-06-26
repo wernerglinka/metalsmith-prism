@@ -81,6 +81,18 @@ Metalsmith(__dirname)
   }))
 ```
 
+#### preLoad (optional)
+
+- Pre-loads language component(s), such that each language component registers itself in the order given in the input array
+- Useful for loading syntax that extends other language components that are not automatically registered by Prism
+
+```javascript
+Metalsmith(__dirname)
+  .use(metalsmithPrism({
+    preLoad: ["java", "scala"]
+  }))
+```
+
 ## Authors
 
 **Robert McGuinness**

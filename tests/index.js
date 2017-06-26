@@ -39,6 +39,27 @@ describe('metalsmith-prism', () => {
 
   });
 
+  it('should pre-load and register language components for java, and then highlight code block for scala', done => {
+
+    const metal = metalsmith(fixture());
+
+    metal
+      .use(metalsmithPrism({
+        preLoad: ['java']
+      }))
+      .build( err => {
+
+        if (err) {
+          return done(err);
+        }
+
+        expect(file('build/scala.html')).to.be.eql(file('expected/scala.html'));
+
+        done();
+      });
+
+  });
+
   it('should NOT highlight unknown language code blocks', done => {
 
     const metal = metalsmith(fixture());

@@ -33,17 +33,17 @@
   "homepage": "https://github.com/Availity/metalsmith-prism",
   "dependencies": {
     "cheerio": "0.22.0",
-    "debug": "2.2.0",
-    "he": "1.1.0",
-    "lodash": "4.15.0",
-    "metalsmith": "2.2.0",
-    "prismjs": "1.5.1"
+    "debug": "^2.6.8",
+    "he": "^1.1.1",
+    "lodash": "^4.17.4",
+    "metalsmith": "^2.3.0",
+    "prismjs": "^1.6.0"
   },
   "devDependencies": {
-    "babel-eslint": "6.1.2",
-    "chai": "3.5.0",
-    "eslint": "3.3.1",
-    "eslint-config-availity": "2.0.0-beta.11",
-    "mocha": "3.0.2"
+    "babel-eslint": "^7.2.3",
+    "chai": "^4.0.2",
+    "eslint": "^4.1.1",
+    "eslint-config-availity": "^2.2.0",
+    "mocha": "^3.4.2"
   }
 }

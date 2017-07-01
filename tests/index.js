@@ -10,9 +10,15 @@ const path = require('path');
 const expect = chai.expect;
 
 const fixture = path.resolve.bind(path, __dirname, 'fixtures/markup');
-
 function file(_path) {
   return fs.readFileSync(fixture(_path), 'utf8');
+}
+
+// Seperate folder for pre-load test because metalsmith will try and compile all markup within folder and if
+// the pre-load option isn't for for languages that exented another then the test will fail
+const fixturePreload = path.resolve.bind(path, __dirname, 'fixtures/preload');
+function filePreload(_path) {
+  return fs.readFileSync(fixturePreload(_path), 'utf8');
 }
 
 describe('metalsmith-prism', () => {
@@ -41,7 +47,7 @@ describe('metalsmith-prism', () => {
 
   it('should pre-load and register language components for java, and then highlight code block for scala', done => {
 
-    const metal = metalsmith(fixture());
+    const metal = metalsmith(fixturePreload());
 
     metal
       .use(metalsmithPrism({
@@ -53,7 +59,7 @@ describe('metalsmith-prism', () => {
           return done(err);
         }
 
-        expect(file('build/scala.html')).to.be.eql(file('expected/scala.html'));
+        expect(filePreload('build/scala.html')).to.be.eql(filePreload('expected/scala.html'));
 
         done();
       });

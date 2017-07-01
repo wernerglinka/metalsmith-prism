@@ -104,7 +104,7 @@ Open source software components distributed or made available in the Availity Ma
 
 ## Copyright and license
 
-Code and documentation copyright 2016 Availity, LLC. Code released under [the MIT license](https://github.com/Availity/metalsmith-prism/blob/master/LICENSE).
+Code and documentation copyright 2017 Availity, LLC. Code released under [the MIT license](https://github.com/Availity/metalsmith-prism/blob/master/LICENSE).
 
 
 

@@ -14,6 +14,9 @@
 + NPM `>= v3.x.x`
 + Metalsmith `>= v2.x.x`
 
+## Notice
+> The plugin does not automatically apply `prism.js` styles to the generated markup. Please see https://github.com/Availity/metalsmith-prism/issues/22 for workarounds.
+
 ## Quickstart
 
 + Install **metalsmith-prism**

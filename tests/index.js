@@ -35,10 +35,10 @@ describe('metalsmith-prism', () => {
           return done(err);
         }
 
-        expect(file('build/json.html')).to.be.eql(file('expected/json.html'));
-        expect(file('build/markup.html')).to.be.eql(file('expected/markup.html'));
-        expect(file('build/ruby.html')).to.be.eql(file('expected/ruby.html'));
-        expect(file('build/bash.html')).to.be.eql(file('expected/bash.html'));
+        expect(file('build/json.html')).to.be.equal(file('expected/json.html'));
+        expect(file('build/markup.html')).to.be.equal(file('expected/markup.html'));
+        expect(file('build/ruby.html')).to.be.equal(file('expected/ruby.html'));
+        expect(file('build/bash.html')).to.be.equal(file('expected/bash.html'));
 
         done();
       });

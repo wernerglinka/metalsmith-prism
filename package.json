@@ -1,10 +1,10 @@
 {
   "name": "metalsmith-prism",
-  "version": "3.1.1",
+  "version": "4.0.0",
   "description": "Syntax highlighting for Metalsmith HTML templates using Prism.js",
   "main": "lib/index.js",
   "engines": {
-    "node": ">= 4.0.0"
+    "node": ">= 14.0.0"
   },
   "scripts": {
     "preversion": "npm run test",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Availity/metalsmith-prism.git"
+    "url": "https://github.com/wernerglinka/metalsmith-prism"
   },
   "keywords": [
     "metalsmith",
@@ -25,25 +25,26 @@
     "lib",
     "README.md"
   ],
-  "author": "Robert McGuinness <rob.mcguinness@availity.com>",
+  "author": "Werner Glinka <werner@glinka.co>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Availity/metalsmith-prism/issues"
+    "url": "https://github.com/wernerglinka/metalsmith-prism/issues"
   },
-  "homepage": "https://github.com/Availity/metalsmith-prism",
+  "homepage": "https://github.com/wernerglinka/metalsmith-prism",
   "dependencies": {
-    "cheerio": "0.22.0",
-    "debug": "^3.1.0",
-    "he": "^1.1.1",
-    "lodash": "^4.17.4",
-    "metalsmith": "^2.3.0",
-    "prismjs": "^1.6.0"
+    "cheerio": "^1.0.0-rc.10",
+    "debug": "^4.3.3",
+    "he": "^1.2.0",
+    "metalsmith": "^2.4.1",
+    "prismjs": "^1.26.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "chai": "^4.0.2",
-    "eslint": "^4.1.1",
-    "eslint-config-availity": "^2.2.0",
-    "mocha": "^3.4.2"
+    "chai": "^4.3.6",
+    "eslint": "^8.3.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "mocha": "^9.2.0",
+    "prettier": "^2.4.1"
   }
 }

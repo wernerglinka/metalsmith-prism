@@ -4,15 +4,14 @@
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license)](http://opensource.org/licenses/MIT)
 [![NPM](http://img.shields.io/npm/v/metalsmith-prism.svg?style=flat-square&label=npm)](https://npmjs.org/package/metalsmith-prism)
-[![Dependency Status](https://img.shields.io/david/Availity/metalsmith-prism.svg?style=flat-square)](https://david-dm.org/Availity/metalsmith-prism)
 [![Linux Passing](https://img.shields.io/travis/Availity/metalsmith-prism.svg?style=flat-square&label=linux)](https://travis-ci.org/Availity/metalsmith-prism)
 [![Windows Passing](https://img.shields.io/appveyor/ci/robmcguinness/metalsmith-prism.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/robmcguinness/metalsmith-prism)
 
 ## Requirements
 
-+ Node `>= 4.x.x`
-+ NPM `>= v3.x.x`
-+ Metalsmith `>= v2.x.x`
++ Node `>= 14.x.x`
++ NPM `>= 8.x.x`
++ Metalsmith `>= v2.4.x`
 
 ## Notice
 > The plugin does not automatically apply `prism.js` styles to the generated markup. Please see https://github.com/Availity/metalsmith-prism/issues/22 for workarounds.

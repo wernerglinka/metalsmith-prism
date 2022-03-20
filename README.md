@@ -1,6 +1,6 @@
 # metalsmith-prism
 
-> Syntax highlighting for [Metalsmith](http://www.metalsmith.io/) HTML templates using [Prism.js](http://prismjs.com/)
+A Metalsmith plugin that **adds Prism specific HTML markup** to code sections for syntax coloring. **In addition to this plugin, prism.css** must be included on the page.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license)](http://opensource.org/licenses/MIT)
 [![NPM](http://img.shields.io/npm/v/metalsmith-prism.svg?style=flat-square&label=npm)](https://npmjs.org/package/metalsmith-prism)
@@ -13,45 +13,43 @@
 + NPM `>= 8.x.x`
 + Metalsmith `>= v2.4.x`
 
-## Notice
-> The plugin does not automatically apply `prism.js` styles to the generated markup. Please see https://github.com/Availity/metalsmith-prism/issues/22 for workarounds.
 
-## Quickstart
 
-+ Install **metalsmith-prism**
+## Installation
 
 ```bash
   npm install metalsmith-prism --save-dev
 ```
 
-+ Add language definition to code block
+## Usage
+
+### Add language definition to code block
 
 ```html
 <code class="language-css">p { color: red }</code>
 ```
 
-+ Add `metalsmith-prism` plugin to metalsmith
+### Add `metalsmith-prism` plugin to metalsmith
 
 ```js
 const metalsmith = require('metalsmith');
-const metalsmithPrism = require('metalsmith-prism');
+const prism = require('metalsmith-prism');
 
 metalsmith(__dirname)
-  .use(metalsmithPrism())
+  .use(prism())
   .build();
 ```
 
-+ **_OPTIONAL_** To use with Markdown code blocks rendered by [metalsmith-markdown](https://github.com/segmentio/metalsmith-markdown)
+### To use with Markdown code blocks rendered by [@metalsmith/markdown](https://github.com/metalsmith/markdown)
 
 ```js
 const metalsmith = require('metalsmith');
-const markdown = require('metalsmith-markdown');
-const metalsmithPrism = require('metalsmith-prism');
+const markdown = require('@metalsmith/markdown');
+const prism = require('metalsmith-prism');
 
 metalsmith(__dirname)
-  // Custom langPrefix option needed as markdown uses 'lang-' by default:
-  .use(markdown( { langPrefix: 'language-' } ))
-  .use(metalsmithPrism())
+  .use(markdown())
+  .use(prism())
   .build();
 ```
 
@@ -59,22 +57,22 @@ metalsmith(__dirname)
 
 Supports all programming languages that have a corresponding Prism.js component file. Component files are found in the [Prism.js `components` directory](https://github.com/PrismJS/prism/tree/master/components).
 
-### Options
+## Options
 
-#### decode (optional)
+**decode (optional)**
 
-- Always decode the html entities when processing language of type `markup`
+Always decode the html entities when processing language of type `markup`
 
 ```js
 Metalsmith(__dirname)
-  .use(metalsmithPrism({
+  .use(prism({
     decode: true
   }))
 ```
 
-#### lineNumbers (optional)
+**lineNumbers (optional)**
 
-- Appends class `line-numbers` to parent `<pre>` tag if present
+Appends class `line-numbers` to parent `<pre>` tag if present
 
 ```javascript
 Metalsmith(__dirname)
@@ -83,30 +81,52 @@ Metalsmith(__dirname)
   }))
 ```
 
-#### preLoad (optional)
+**preLoad (optional)**
 
-- Pre-loads language component(s), such that each language component registers itself in the order given in the input array
-- Useful for loading syntax that extends other language components that are not automatically registered by Prism
+Pre-loads language component(s), such that each language component registers itself in the order given in the input array
+
+Useful for loading syntax that extends other language components that are not automatically registered by Prism
 
 ```javascript
 Metalsmith(__dirname)
-  .use(metalsmithPrism({
+  .use(prism({
     preLoad: ["java", "scala"]
   }))
 ```
+## Debug
 
-## Authors
+To enable debug logs, set the `DEBUG` environment variable to `metalsmith-prism`:
 
-**Robert McGuinness**
-+ [rob.mcguinness@availity.com](rob.mcguinness@availity.com)
+Linux/Mac:
 
-## Disclaimer
+```
+DEBUG=metalsmith-prism
+```
 
-Open source software components distributed or made available in the Availity Materials are licensed to Company under the terms of the applicable open source license agreements, which may be found in text files included in the Availity Materials.
+Windows:
 
-## Copyright and license
+```
+set "DEBUG=metalsmith-prism"
+```
 
-Code and documentation copyright 2017 Availity, LLC. Code released under [the MIT license](https://github.com/Availity/metalsmith-prism/blob/master/LICENSE).
+## CLI Usage
+
+Add `metalsmith-prism` key to your `metalsmith.json` plugins key
+
+```json
+{
+  "plugins": {
+    "metalsmith-prism": {
+      "lineNumbers": true,
+      "decode": true
+    }
+  }
+}
+```
+
+## License
+
+Code released under [the MIT license](https://github.com/wernerglinka/metalsmith-prism/blob/main/LICENSE).
 
 
 

@@ -83,7 +83,7 @@ Metalsmith(__dirname)
 
 **lineNumbers (optional)**
 
-Appends class `line-numbers` to parent `<pre>` tag if present
+Adds the additional HTML markup so line numbers can be added via the line-unumbers CSS. 
 
 ```javascript
 Metalsmith(__dirname)

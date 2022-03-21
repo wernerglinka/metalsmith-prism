@@ -23,6 +23,17 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 
 ## Usage
 
+### Add Prism styles to page header. 
+
+`prism-line-numbers.css` is only needed if the `linenumbers` option is set to `true`. 
+
+The css files can be downloaded from the [Prism website](https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript) or you can [use a CDN](https://prismjs.com/#basic-usage-cdn). Please refer to the [Prism documentation](https://prismjs.com/index.html) for details.
+
+```html
+<link href="/assets/prism.css" rel="stylesheet" />
+<link href="/assets/prism-line-numbers.css" rel="stylesheet" />
+```
+
 ### Add language definition to code block
 
 ```html

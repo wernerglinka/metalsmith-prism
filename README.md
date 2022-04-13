@@ -1,11 +1,13 @@
 # metalsmith-prism
 
-A Metalsmith plugin that **adds Prism specific HTML markup** to code sections for syntax coloring. **In addition to this plugin, prism.css** must be included on the page.
+A Metalsmith plugin that **adds Prism specific HTML markup** to code sections for syntax coloring. 
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license)](http://opensource.org/licenses/MIT)
 [![NPM](http://img.shields.io/npm/v/metalsmith-prism.svg?style=flat-square&label=npm)](https://npmjs.org/package/metalsmith-prism)
 [![Linux Passing](https://img.shields.io/travis/Availity/metalsmith-prism.svg?style=flat-square&label=linux)](https://travis-ci.org/Availity/metalsmith-prism)
 [![Windows Passing](https://img.shields.io/appveyor/ci/robmcguinness/metalsmith-prism.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/robmcguinness/metalsmith-prism)
+
+While this plugin adds all the required Prism HTML markup, **prism.css** must be included on the page to provide the syntax coloring.
 
 ## Requirements
 
@@ -17,17 +19,23 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 
 ## Installation
 
+NPM:
 ```bash
   npm install metalsmith-prism --save-dev
+```
+
+Yarn:
+```bash
+  yarn add metalsmith-prism
 ```
 
 ## Usage
 
 ### Add Prism styles to page header. 
 
-`prism-line-numbers.css` is only needed if the `linenumbers` option is set to `true`. 
+If the `linenumbers` option is set to `true`, `prism-line-numbers.css` must be added to the page. 
 
-The css files can be downloaded from the [Prism website](https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript) or you can [use a CDN](https://prismjs.com/#basic-usage-cdn). Please refer to the [Prism documentation](https://prismjs.com/index.html) for details.
+The css files can be downloaded from the [Prism website](https://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascript) or [use a CDN](https://prismjs.com/#basic-usage-cdn). Please refer to the [Prism documentation](https://prismjs.com/index.html) for details.
 
 ```html
 <link href="/assets/prism.css" rel="stylesheet" />
@@ -134,6 +142,12 @@ Add `metalsmith-prism` key to your `metalsmith.json` plugins key
   }
 }
 ```
+## Credits
+
+Robert McGuinness - for the initial implementation of the plugin.
+
+
+
 
 ## License
 

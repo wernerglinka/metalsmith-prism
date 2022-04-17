@@ -144,7 +144,7 @@ Add `metalsmith-prism` key to your `metalsmith.json` plugins key
 ```
 ## Credits
 
-Robert McGuinness - for the initial implementation of the plugin.
+[Robert McGuinness]( https://github.com/robmcguinness) - for the initial implementation of the plugin.
 
 
 

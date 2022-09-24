@@ -35,7 +35,7 @@
     "cheerio": "^1.0.0-rc.10",
     "debug": "^4.3.3",
     "he": "^1.2.0",
-    "metalsmith": "^2.4.1",
+    "metalsmith": "^2.5.0",
     "prismjs": "^1.26.0"
   },
   "devDependencies": {

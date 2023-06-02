@@ -35,16 +35,16 @@
     "cheerio": "^1.0.0-rc.12",
     "debug": "^4.3.4",
     "he": "^1.2.0",
-    "metalsmith": "^2.5.1",
+    "metalsmith": "^2.6.0",
     "prismjs": "^1.29.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
     "chai": "^4.3.7",
-    "eslint": "^8.36.0",
+    "eslint": "^8.41.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-prettier": "^4.2.1",
     "mocha": "^10.2.0",
-    "prettier": "^2.8.6"
+    "prettier": "^2.8.8"
   }
 }

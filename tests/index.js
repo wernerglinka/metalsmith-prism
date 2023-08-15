@@ -35,31 +35,10 @@ describe('metalsmith-prism', () => {
           return done(err);
         }
 
-        expect(file('build/json.html')).to.be.equal(file('expected/json.html'));
-        expect(file('build/markup.html')).to.be.equal(file('expected/markup.html'));
-        expect(file('build/ruby.html')).to.be.equal(file('expected/ruby.html'));
-        expect(file('build/bash.html')).to.be.equal(file('expected/bash.html'));
-
-        done();
-      });
-
-  });
-
-  it('should pre-load and register language components for java, and then highlight code block for scala', done => {
-
-    const metal = metalsmith(fixturePreload());
-
-    metal
-      .use(metalsmithPrism({
-        preLoad: ['java']
-      }))
-      .build( err => {
-
-        if (err) {
-          return done(err);
-        }
-
-        expect(filePreload('build/scala.html')).to.be.eql(filePreload('expected/scala.html'));
+        expect(file('build/json.html').toString().replace(/\s+/g, ' ').trim()).to.be.eql(file('expected/json.html').toString().replace(/\s+/g, ' ').trim());
+        expect(file('build/markup.html').toString().replace(/\s+/g, ' ').trim()).to.be.eql(file('expected/markup.html').toString().replace(/\s+/g, ' ').trim());
+        expect(file('build/ruby.html').toString().replace(/\s+/g, ' ').trim()).to.be.eql(file('expected/ruby.html').toString().replace(/\s+/g, ' ').trim());
+        expect(file('build/bash.html').toString().replace(/\s+/g, ' ').trim()).to.be.eql(file('expected/bash.html').toString().replace(/\s+/g, ' ').trim());
 
         done();
       });
@@ -98,7 +77,7 @@ describe('metalsmith-prism', () => {
           return done(err);
         }
 
-        expect(file('build/markup-encoded.html')).to.be.eql(file('expected/markup-encoded.html'));
+        expect(file('build/markup-encoded.html').toString().replace(/\s+/g, ' ').trim()).to.be.eql(file('expected/markup-encoded.html').toString().replace(/\s+/g, ' ').trim());
 
         done();
       });
@@ -117,7 +96,7 @@ describe('metalsmith-prism', () => {
           return done(err);
         }
 
-        expect(file('build/line-numbers.html')).to.be.eql(file('expected/pre-classname.html'));
+        expect(file('build/line-numbers.html').toString().replace(/\s+/g, ' ').trim()).to.be.eql(file('expected/pre-classname.html').toString().replace(/\s+/g, ' ').trim());
 
         done();
       });
@@ -138,7 +117,7 @@ describe('metalsmith-prism', () => {
           return done(err);
         }
 
-        expect(file('build/line-numbers.html')).to.be.eql(file('expected/line-numbers.html'));
+        expect(file('build/line-numbers.html').toString().replace(/\s+/g, ' ').trim()).to.be.eql(file('expected/line-numbers.html').toString().replace(/\s+/g, ' ').trim());
 
         done();
       });

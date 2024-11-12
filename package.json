@@ -8,7 +8,7 @@
   },
   "scripts": {
     "preversion": "npm run test",
-    "test": "mocha ./tests/index.js",
+    "test": "mocha ./tests/index.mjs",
     "lint": "eslint ./lib ./tests"
   },
   "repository": {
@@ -32,19 +32,19 @@
   },
   "homepage": "https://github.com/wernerglinka/metalsmith-prism",
   "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "debug": "^4.3.4",
+    "cheerio": "^1.0.0",
+    "debug": "^4.3.7",
     "he": "^1.2.0",
-    "metalsmith": "^2.6.0",
+    "metalsmith": "^2.6.3",
     "prismjs": "^1.29.0"
   },
   "devDependencies": {
     "babel-eslint": "^7.2.3",
-    "chai": "^4.3.7",
-    "eslint": "^8.41.0",
-    "eslint-config-prettier": "^8.8.0",
-    "eslint-plugin-prettier": "^4.2.1",
-    "mocha": "^10.2.0",
-    "prettier": "^2.8.8"
+    "chai": "^5.1.2",
+    "eslint": "^9.14.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "mocha": "^10.8.2",
+    "prettier": "^3.3.3"
   }
 }

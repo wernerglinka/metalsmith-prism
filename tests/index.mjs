@@ -1,7 +1,5 @@
 /* global describe, it */
 
-'use strict';
-
 import * as chai from 'chai';
 import { load } from 'cheerio';
 const { expect } = chai;

@@ -1,10 +1,12 @@
 {
   "name": "metalsmith-prism",
-  "version": "4.3.0",
+  "version": "4.0.0",
   "description": "Syntax highlighting for Metalsmith HTML templates using Prism.js",
+  "type": "module",
   "main": "lib/index.js",
+  "exports": "./lib/index.js",
   "engines": {
-    "node": ">= 14.0.0"
+    "node": ">= 18.0.0"
   },
   "scripts": {
     "preversion": "npm run test",
@@ -39,7 +41,6 @@
     "prismjs": "^1.29.0"
   },
   "devDependencies": {
-    "babel-eslint": "^7.2.3",
     "chai": "^5.1.2",
     "eslint": "^9.14.0",
     "eslint-config-prettier": "^9.1.0",

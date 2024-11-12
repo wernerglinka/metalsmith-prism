@@ -1,0 +1,40 @@
+<code class="language-php">
+&lt;?php
+namespace App\Services;
+
+use App\Interfaces\LoggerInterface;
+use App\Traits\Loggable;
+
+/**
+ * Example service class demonstrating PHP features
+ */
+class AdvancedService implements LoggerInterface {
+    use Loggable;
+
+    private string $name;
+    protected array $config = [];
+    public readonly int $id;
+
+    public function __construct(
+        private LoggerInterface $logger,
+        #[Required] string $name = 'default'
+    ) {
+        $this->name = $name;
+    }
+
+    public function process(mixed $data): array|null {
+        try {
+            $result = match($data['type']) {
+                'string' => $this->processString($data['value']),
+                'array' => $this->processArray($data['value']),
+                default => throw new \InvalidArgumentException(),
+            };
+
+            return $result;
+        } catch (\Throwable $e) {
+            $this->logger->error($e->getMessage());
+            return null;
+        }
+    }
+}
+</code>

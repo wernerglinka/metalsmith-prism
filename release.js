@@ -1,7 +1,11 @@
 #!/usr/bin/env node
 
 // Explicitly load .env file
-require('dotenv').config();
+import dotenv from 'dotenv';
+import { spawnSync } from 'child_process';
+
+// Load environment variables from .env
+dotenv.config();
 
 // Check if GITHUB_TOKEN was loaded
 if (!process.env.GITHUB_TOKEN) {
@@ -18,7 +22,6 @@ const args = process.argv.slice(2);
 const dryRun = args.includes('--dry-run');
 
 // Spawn release-it process
-const { spawnSync } = require('child_process');
 const result = spawnSync(
   './node_modules/.bin/release-it', 
   dryRun ? ['.', '--dry-run'] : ['.'], 

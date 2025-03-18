@@ -43,10 +43,19 @@ The release process:
 6. Creates a GitHub release with the changelog
 7. Creates an npm package (.tgz file) but does not publish it to npm
 
-Required environment variables in .env file:
+Required environment variables:
 - `GITHUB_TOKEN` - A GitHub personal access token with repo scope
 
-Note: The release.js script explicitly loads the .env file and checks that GITHUB_TOKEN is set before running release-it.
+Notes on token handling:
+1. The release script will first check if GITHUB_TOKEN is already in the environment
+2. If not found in the environment, it will try to load it from the .env file using dotenv
+3. If still not found, it will read the .env file directly to extract the token
+4. The token is passed directly to release-it using the --github.token parameter
+
+You can also run the command with the token inline if needed:
+```bash
+GITHUB_TOKEN=your_token npm run release
+```
 
 ## Metalsmith Plugin Best Practices
 

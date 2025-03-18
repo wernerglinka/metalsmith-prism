@@ -203,8 +203,8 @@ Add `metalsmith-prism` key to your `metalsmith.json` plugins key
 
 ## Credits
 
-- [Robert McGuinness](https://github.com/robmcguinness) - for the initial implementation of the plugin
-- [Werner Glinka](https://github.com/wernerglinka) - current maintainer
+- [Robert McGuinness](https://github.com/robmcguinness) - for the initial implementation of the plugin.
+- [Werner Glinka](https://github.com/wernerglinka) - current maintainer.
 
 ## License
 

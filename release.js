@@ -15,7 +15,7 @@ if (!process.env.GITHUB_TOKEN) {
 }
 
 // Log success
-console.log('GITHUB_TOKEN loaded successfully:', process.env.GITHUB_TOKEN.substring(0, 4) + '...');
+console.log('GITHUB_TOKEN loaded successfully:', `${process.env.GITHUB_TOKEN.substring(0, 4)  }...`);
 
 // Args for release-it
 const args = process.argv.slice(2);

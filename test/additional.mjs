@@ -1,12 +1,9 @@
 /* global describe, it, beforeEach, afterEach */
 
 import * as chai from 'chai';
-import { load } from 'cheerio';
 const { expect } = chai;
 
-import metalsmith from 'metalsmith';
 import metalsmithPrism from '../src/index.js';
-import loadLanguages from 'prismjs/components/index.js';
 import debugLib from 'debug';
 
 describe('metalsmith-prism additional tests', function() {
@@ -41,7 +38,7 @@ describe('metalsmith-prism additional tests', function() {
       });
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         // No error should be thrown
         done();
       });
@@ -70,7 +67,7 @@ describe('metalsmith-prism additional tests', function() {
       });
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         // Expect fewer loads than requested languages (due to deduplication)
         expect(loadCount).to.be.at.most(2);
         done();
@@ -94,7 +91,7 @@ describe('metalsmith-prism additional tests', function() {
       const plugin = metalsmithPrism();
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         // Should not throw and leave content unchanged since no valid language classes
         expect(files['malformed.html'].contents.toString()).to.include('No language specified');
         expect(files['malformed.html'].contents.toString()).to.include('Missing dash');
@@ -115,7 +112,7 @@ describe('metalsmith-prism additional tests', function() {
       const plugin = metalsmithPrism();
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         // Content should remain unchanged
         expect(files['test.js'].contents.toString()).to.equal(jsContent);
         done();
@@ -135,7 +132,7 @@ describe('metalsmith-prism additional tests', function() {
       const plugin = metalsmithPrism();
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         // Content should remain unchanged
         expect(files['no-code.html'].contents.toString()).to.equal(htmlNoCode);
         done();
@@ -156,7 +153,7 @@ describe('metalsmith-prism additional tests', function() {
       const plugin = metalsmithPrism();
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         // Should highlight as markup
         const result = files['unknown-lang.html'].contents.toString();
@@ -185,7 +182,7 @@ describe('metalsmith-prism additional tests', function() {
       });
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['entities.html'].contents.toString();
         
@@ -224,7 +221,7 @@ describe('metalsmith-prism additional tests', function() {
         // Restore original debug status
         debug.enabled = originalEnabled;
         
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         // Our mock should have captured debug output if enabled
         if (debug.enabled) {

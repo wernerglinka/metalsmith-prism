@@ -23,7 +23,7 @@
     "release": "npm run build && node ./release.js",
     "release:check": "npm run build && node ./release.js --dry-run",
     "test": "c8 mocha test/index.mjs test/additional.mjs test/comprehensive.mjs -t 15000",
-    "test:debug": "DEBUG=metalsmith-optimize-html:* npm test",
+    "test:debug": "DEBUG=metalsmith-prism:* npm test",
     "test:e2e": "serve -l 3000 test/fixtures"
   },
   "repository": {

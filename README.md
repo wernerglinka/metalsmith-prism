@@ -4,8 +4,7 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license)](http://opensource.org/licenses/MIT)
 [![NPM](http://img.shields.io/npm/v/metalsmith-prism.svg?style=flat-square&label=npm)](https://npmjs.org/package/metalsmith-prism)
-[![Linux Passing](https://img.shields.io/travis/Availity/metalsmith-prism.svg?style=flat-square&label=linux)](https://travis-ci.org/Availity/metalsmith-prism)
-[![Windows Passing](https://img.shields.io/appveyor/ci/robmcguinness/metalsmith-prism.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/robmcguinness/metalsmith-prism)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/wernerglinka/metalsmith-prism/node.js.yml?branch=master&style=flat-square&label=build)](https://github.com/wernerglinka/metalsmith-prism/actions/workflows/node.js.yml)
 
 ## Dual Module Support (ESM and CommonJS)
 
@@ -24,9 +23,8 @@ While this plugin adds all the required Prism HTML markup, **prism.css** must be
 
 ## Requirements
 
-- Node `>= 18.x.x`
-- NPM `>= 9.x.x`
-- Metalsmith `>= v2.6.x`
+- Node `>= 18.0.0`
+- Metalsmith `>= v2.6.0`
 
 ## Quick Start
 
@@ -143,7 +141,7 @@ Adds the additional HTML markup so line numbers can be added via the line-number
 
 ```javascript
 Metalsmith(__dirname).use(
-  metalsmithPrism({
+  prism({
     lineNumbers: true,
   })
 );
@@ -169,14 +167,20 @@ To enable debug logs, set the `DEBUG` environment variable to `metalsmith-prism`
 
 Linux/Mac:
 
-```
-DEBUG=metalsmith-prism
+```bash
+DEBUG=metalsmith-prism npm test
 ```
 
 Windows:
 
+```bash
+set "DEBUG=metalsmith-prism" && npm test
 ```
-set "DEBUG=metalsmith-prism"
+
+Or use the test:debug script:
+
+```bash
+npm run test:debug
 ```
 
 ## CLI Usage
@@ -196,7 +200,8 @@ Add `metalsmith-prism` key to your `metalsmith.json` plugins key
 
 ## Credits
 
-[Robert McGuinness](https://github.com/robmcguinness) - for the initial implementation of the plugin.
+- [Robert McGuinness](https://github.com/robmcguinness) - for the initial implementation of the plugin
+- [Werner Glinka](https://github.com/wernerglinka) - current maintainer
 
 ## License
 

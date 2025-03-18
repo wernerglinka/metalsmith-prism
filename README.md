@@ -1,6 +1,6 @@
 # metalsmith-prism
 
-A Metalsmith plugin that **adds Prism specific HTML markup** to code sections for syntax coloring.
+A Metalsmith plugin that **adds Prism specific HTML markup** to code sections for syntax coloring. Now with full dual module support for both **ESM** and **CommonJS** environments.
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license)](http://opensource.org/licenses/MIT)
 [![NPM](http://img.shields.io/npm/v/metalsmith-prism.svg?style=flat-square&label=npm)](https://npmjs.org/package/metalsmith-prism)
@@ -8,13 +8,16 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 
 ## Dual Module Support (ESM and CommonJS)
 
-This plugin supports both ESM and CommonJS environments:
+This plugin supports both ESM and CommonJS environments with no configuration needed:
 
 - ESM: `import prism from 'metalsmith-prism'`
 - CommonJS: `const prism = require('metalsmith-prism')`
 
+The package detects your environment automatically and provides the appropriate module format. This makes it compatible with both modern ESM projects and legacy CommonJS codebases.
+
 While this plugin adds all the required Prism HTML markup, **prism.css** must be included on the page to provide the syntax coloring. The plugin:
 
+- Supports both ESM and CommonJS environments
 - Automatically handles language dependencies
 - Supports HTML entity decoding
 - Can add line numbers

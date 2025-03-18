@@ -5,7 +5,7 @@ import { load } from 'cheerio';
 const { expect } = chai;
 
 import metalsmith from 'metalsmith';
-import metalsmithPrism from '../lib/index.js';
+import metalsmithPrism from '../src/index.js'; // Using source file directly for tests
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'node:url';
@@ -68,7 +68,7 @@ describe( 'metalsmith-prism', function() {
       metal
         .use( metalsmithPrism() )
         .build( err => {
-          if ( err ) return done( err );
+          if ( err ) {return done( err );}
 
           const tests = [ 'json', 'markup', 'ruby', 'bash' ];
 
@@ -94,7 +94,7 @@ describe( 'metalsmith-prism', function() {
       metal
         .use( metalsmithPrism() )
         .build( err => {
-          if ( err ) return done( err );
+          if ( err ) {return done( err );}
 
           try {
             const build = readFixture( 'markup', 'build/unknown.html' );
@@ -112,7 +112,7 @@ describe( 'metalsmith-prism', function() {
   } );
 
   describe( 'Language Preloading', () => {
-    it( 'should pre-load and register language components for java, and then highlight code block for scala', function( done ) {
+    it( 'should pre-load and register language components for java, and then highlight code block for scala', ( done ) => {
       const metal = metalsmith( getFixturePath( 'preload' )() );
 
       metal
@@ -120,7 +120,7 @@ describe( 'metalsmith-prism', function() {
           preLoad: [ 'java' ]
         } ) )
         .build( err => {
-          if ( err ) return done( err );
+          if ( err ) {return done( err );}
 
           try {
             const build = readFixture( 'preload', 'build/scala.html' );
@@ -138,7 +138,7 @@ describe( 'metalsmith-prism', function() {
   } );
 
   describe( 'PHP Support', () => {
-    it( 'should highlight basic PHP code blocks correctly', function( done ) {
+    it( 'should highlight basic PHP code blocks correctly', ( done ) => {
       const metal = metalsmith( getFixturePath( 'markup' )() );
 
       metal
@@ -146,7 +146,7 @@ describe( 'metalsmith-prism', function() {
           decode: true
         } ) )
         .build( err => {
-          if ( err ) return done( err );
+          if ( err ) {return done( err );}
 
           try {
             const build = readFixture( 'markup', 'build/php.html' );
@@ -162,7 +162,7 @@ describe( 'metalsmith-prism', function() {
         } );
     } );
 
-    it( 'should highlight advanced PHP features correctly', function( done ) {
+    it( 'should highlight advanced PHP features correctly', ( done ) => {
       const metal = metalsmith( getFixturePath( 'markup' )() );
 
       metal
@@ -171,7 +171,7 @@ describe( 'metalsmith-prism', function() {
           preLoad: [ 'markup', 'php' ]
         } ) )
         .build( err => {
-          if ( err ) return done( err );
+          if ( err ) {return done( err );}
 
           try {
             const build = readFixture( 'markup', 'build/php-advanced.html' );
@@ -189,7 +189,7 @@ describe( 'metalsmith-prism', function() {
   } );
 
   describe( 'HTML Features', () => {
-    it( 'should decode markup blocks when options#decode is true', function( done ) {
+    it( 'should decode markup blocks when options#decode is true', ( done ) => {
       const metal = metalsmith( getFixturePath( 'markup' )() );
 
       metal
@@ -197,7 +197,7 @@ describe( 'metalsmith-prism', function() {
           decode: true
         } ) )
         .build( err => {
-          if ( err ) return done( err );
+          if ( err ) {return done( err );}
 
           try {
             const build = readFixture( 'markup', 'build/markup-encoded.html' );
@@ -213,13 +213,13 @@ describe( 'metalsmith-prism', function() {
         } );
     } );
 
-    it( 'should add language class to <pre> tag', function( done ) {
+    it( 'should add language class to <pre> tag', ( done ) => {
       const metal = metalsmith( getFixturePath( 'markup' )() );
 
       metal
         .use( metalsmithPrism() )
         .build( err => {
-          if ( err ) return done( err );
+          if ( err ) {return done( err );}
 
           try {
             const build = readFixture( 'markup', 'build/line-numbers.html' );
@@ -235,7 +235,7 @@ describe( 'metalsmith-prism', function() {
         } );
     } );
 
-    it( 'should add line numbers class to <pre> tag when options#lineNumbers is true', function( done ) {
+    it( 'should add line numbers class to <pre> tag when options#lineNumbers is true', ( done ) => {
       const metal = metalsmith( getFixturePath( 'markup' )() );
 
       metal
@@ -243,7 +243,7 @@ describe( 'metalsmith-prism', function() {
           lineNumbers: true
         } ) )
         .build( err => {
-          if ( err ) return done( err );
+          if ( err ) {return done( err );}
 
           try {
             const build = readFixture( 'markup', 'build/line-numbers.html' );

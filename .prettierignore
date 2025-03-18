@@ -1,0 +1,3 @@
+test/fixtures/**
+coverage/**
+package-lock.json

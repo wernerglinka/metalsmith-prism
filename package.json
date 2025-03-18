@@ -3,15 +3,28 @@
   "version": "5.0.1",
   "description": "Syntax highlighting for Metalsmith HTML templates using Prism.js",
   "type": "module",
-  "main": "lib/index.js",
-  "exports": "./lib/index.js",
+  "main": "./lib/index.cjs",
+  "module": "./lib/index.modern.js",
+  "exports": {
+    "import": "./lib/index.modern.js",
+    "require": "./lib/index.cjs"
+  },
   "engines": {
     "node": ">= 18.0.0"
   },
   "scripts": {
-    "preversion": "npm run test",
-    "test": "mocha ./tests/index.mjs",
-    "lint": "eslint ./lib ./tests"
+    "coverage": "npm test && c8 report --reporter=text-lcov > ./coverage.info",
+    "build": "microbundle --entry src/index.js --output lib/index.js --target node -f esm,cjs --strict --generateTypes=false",
+    "prepublishOnly": "npm run build",
+    "format": "prettier --write \"**/*.{js,json}\"",
+    "format:check": "prettier --list-different \"**/*.{yml,md,js,json}\"",
+    "lint": "eslint --fix .",
+    "lint:check": "eslint --fix-dry-run .",
+    "release": "npm run build && node -r dotenv/config ./node_modules/.bin/release-it .",
+    "release:check": "npm run build && node -r dotenv/config ./node_modules/.bin/release-it . --dry-run",
+    "test": "c8 mocha tests/index.mjs -t 5000",
+    "test:debug": "DEBUG=metalsmith-optimize-html:* npm test",
+    "test:e2e": "serve -l 3000 test/fixtures"
   },
   "repository": {
     "type": "git",
@@ -24,6 +37,7 @@
     "highlighting"
   ],
   "files": [
+    "src",
     "lib",
     "README.md"
   ],
@@ -35,17 +49,20 @@
   "homepage": "https://github.com/wernerglinka/metalsmith-prism",
   "dependencies": {
     "cheerio": "^1.0.0",
-    "debug": "^4.3.7",
+    "debug": "^4.4.0",
     "he": "^1.2.0",
     "metalsmith": "^2.6.3",
-    "prismjs": "^1.29.0"
+    "prismjs": "^1.30.0"
   },
   "devDependencies": {
-    "chai": "^5.1.2",
-    "eslint": "^9.15.0",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-prettier": "^5.2.1",
-    "mocha": "^10.8.2",
-    "prettier": "^3.3.3"
+    "c8": "^10.1.3",
+    "chai": "^5.2.0",
+    "eslint": "^9.22.0",
+    "eslint-config-prettier": "^10.1.1",
+    "eslint-plugin-prettier": "^5.2.3",
+    "globals": "^16.0.0",
+    "microbundle": "^0.15.1",
+    "mocha": "^11.1.0",
+    "prettier": "^3.5.3"
   }
 }

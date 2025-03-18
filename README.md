@@ -7,6 +7,13 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 [![Linux Passing](https://img.shields.io/travis/Availity/metalsmith-prism.svg?style=flat-square&label=linux)](https://travis-ci.org/Availity/metalsmith-prism)
 [![Windows Passing](https://img.shields.io/appveyor/ci/robmcguinness/metalsmith-prism.svg?style=flat-square&label=windows)](https://ci.appveyor.com/project/robmcguinness/metalsmith-prism)
 
+## Dual Module Support (ESM and CommonJS)
+
+This plugin supports both ESM and CommonJS environments:
+
+- ESM: `import prism from 'metalsmith-prism'`
+- CommonJS: `const prism = require('metalsmith-prism')`
+
 While this plugin adds all the required Prism HTML markup, **prism.css** must be included on the page to provide the syntax coloring. The plugin:
 
 - Automatically handles language dependencies
@@ -74,21 +81,40 @@ The css files can be downloaded from the [Prism website](https://prismjs.com/dow
 
 ### Add `metalsmith-prism` plugin to metalsmith
 
+**ESM:**
 ```js
-const metalsmith = require('metalsmith');
+import Metalsmith from 'metalsmith';
+import prism from 'metalsmith-prism';
+
+Metalsmith(__dirname).use(prism()).build();
+```
+
+**CommonJS:**
+```js
+const Metalsmith = require('metalsmith');
 const prism = require('metalsmith-prism');
 
-metalsmith(__dirname).use(prism()).build();
+Metalsmith(__dirname).use(prism()).build();
 ```
 
 ### To use with Markdown code blocks rendered by [@metalsmith/markdown](https://github.com/metalsmith/markdown)
 
+**ESM:**
 ```js
-const metalsmith = require('metalsmith');
+import Metalsmith from 'metalsmith';
+import markdown from '@metalsmith/markdown';
+import prism from 'metalsmith-prism';
+
+Metalsmith(__dirname).use(markdown()).use(prism()).build();
+```
+
+**CommonJS:**
+```js
+const Metalsmith = require('metalsmith');
 const markdown = require('@metalsmith/markdown');
 const prism = require('metalsmith-prism');
 
-metalsmith(__dirname).use(markdown()).use(prism()).build();
+Metalsmith(__dirname).use(markdown()).use(prism()).build();
 ```
 
 ## Language support

@@ -3,20 +3,21 @@ import { extname } from 'path';
 import Prism from 'prismjs';
 import loadLanguages from 'prismjs/components/index.js';
 import he from 'he';
+import debugLib from 'debug';
+
+const debug = debugLib('metalsmith-prism');
 
 // Import languages from Prism's default export
 const { languages } = Prism;
 
-// Preload PHP
-loadLanguages(['php']);
-
 /**
- * Check if a file is HTML
- * @param {string} filePath
- * @returns {boolean}
+ * Check if a file is HTML based on its extension
+ * @param {string} filePath - Path to the file
+ * @returns {boolean} - True if the file has an HTML extension
  */
 const isHTMLFile = (filePath) => {
-  return /\.html|\.htm/.test(extname(filePath));
+  const extension = extname(filePath).toLowerCase();
+  return extension === '.html' || extension === '.htm';
 };
 
 /**
@@ -28,17 +29,54 @@ const isHTMLFile = (filePath) => {
 
 /**
  * Metalsmith plugin to highlight code syntax with PrismJS
+ * 
+ * This plugin finds all code blocks in HTML files that have language-* classes
+ * and applies Prism.js syntax highlighting to them. It can also add line numbers
+ * and handle HTML entity decoding.
  *
- * @param {Options} [options]
- * @returns {import('metalsmith').Plugin}
+ * @param {Options} [options] - Configuration options
+ * @param {boolean} [options.decode=false] - Whether to decode HTML entities in code blocks
+ * @param {boolean} [options.lineNumbers=false] - Whether to add line numbers to code blocks
+ * @param {string[]} [options.preLoad=[]] - Languages to preload before processing
+ * @returns {import('metalsmith').Plugin} - A metalsmith plugin function
+ * @example
+ * // Basic usage
+ * metalsmith.use(prism());
+ * 
+ * // With options
+ * metalsmith.use(prism({
+ *   decode: true,
+ *   lineNumbers: true,
+ *   preLoad: ['java', 'scala']
+ * }));
  */
 function metalsmithPrism(options = {}) {
+  // Track loaded languages to avoid duplicate loading
+  const loadedLanguages = new Set();
+  
+  // Always load PHP by default
+  debug('Loading PHP by default');
+  try {
+    loadLanguages(['php']);
+    loadedLanguages.add('php');
+  } catch (e) {
+    debug('Failed to load PHP:', e);
+  }
+  
   if (options.preLoad) {
+    debug('Preloading languages:', options.preLoad);
     options.preLoad.forEach((language) => {
-      try {
-        loadLanguages([language]);
-      } catch (e) {
-        console.warn(`Failed to preload prism syntax: ${language}!`);
+      if (!loadedLanguages.has(language)) {
+        try {
+          loadLanguages([language]);
+          loadedLanguages.add(language);
+          debug(`Successfully preloaded language: ${language}`);
+        } catch (e) {
+          console.warn(`Failed to preload prism syntax: ${language}!`, e);
+          debug(`Error preloading language ${language}:`, e);
+        }
+      } else {
+        debug(`Language ${language} already loaded, skipping`);
       }
     });
   }
@@ -48,27 +86,39 @@ function metalsmithPrism(options = {}) {
    * @param {string} language
    */
   function requireLanguage(language) {
-    if (!languages[language]) {
+    if (!loadedLanguages.has(language) && !languages[language]) {
+      debug(`Loading language on-demand: ${language}`);
       try {
         loadLanguages([language]);
+        loadedLanguages.add(language);
+        debug(`Successfully loaded language: ${language}`);
       } catch (e) {
-        console.warn(`Failed to load prism syntax: ${language}!`);
+        console.warn(`Failed to load prism syntax: ${language}!`, e);
+        debug(`Error loading language ${language}:`, e);
       }
     }
   }
 
-  // Set up line numbers
+  // Set up line numbers functionality
   const NEW_LINE_EXP = /\n(?!$)/g;
   let lineNumbersWrapper;
 
-  Prism.hooks.add('after-tokenize', function (env) {
-    const match = env.code.match(NEW_LINE_EXP);
-    const linesNum = match ? match.length + 1 : 1;
-    const lines = new Array(linesNum + 1).join('<span></span>');
-    lineNumbersWrapper = `<span aria-hidden="true" class="line-numbers-rows">${lines}</span>`;
-  });
+  // Only set up the hook if line numbers are requested
+  if (options.lineNumbers) {
+    debug('Setting up line numbers hook');
+    Prism.hooks.add('after-tokenize', function (env) {
+      const match = env.code.match(NEW_LINE_EXP);
+      const linesNum = match ? match.length + 1 : 1;
+      debug(`Counted ${linesNum} lines for line numbers`);
+      const lines = new Array(linesNum + 1).join('<span></span>');
+      lineNumbersWrapper = `<span aria-hidden="true" class="line-numbers-rows">${lines}</span>`;
+    });
+  }
 
   return function (files, metalsmith, done) {
+    debug('Starting metalsmith-prism plugin');
+    debug('Options:', options);
+    
     setImmediate(done);
 
     Object.keys(files).forEach((file) => {
@@ -76,12 +126,18 @@ function metalsmithPrism(options = {}) {
         return;
       }
 
+      debug(`Processing HTML file: ${file}`);
       const contents = files[file].contents.toString();
       const $ = load(contents, { decodeEntities: false });
       let highlighted = false;
       const code = $('code');
 
-      if (!code.length) return;
+      if (!code.length) {
+        debug(`No code blocks found in ${file}`);
+        return;
+      }
+      
+      debug(`Found ${code.length} code blocks in ${file}`);
 
       code.each(function () {
         const $this = $(this);
@@ -100,29 +156,39 @@ function metalsmithPrism(options = {}) {
             if (options.lineNumbers) {
               $pre.addClass('line-numbers');
               addLineNumbers = true;
+              debug('Adding line numbers');
             }
           }
 
           highlighted = true;
           let language = targets[1];
+          debug(`Detected language: ${language}`);
           requireLanguage(language);
 
           if (!languages[language]) {
+            debug(`Language ${language} not available, falling back to markup`);
             language = 'markup';
           }
 
           const html = language === 'markup' && !options.decode ? $this.html() : he.decode($this.html());
+          debug(`HTML decoding ${options.decode ? 'applied' : 'not applied'} for language ${language}`);
 
+          debug(`Highlighting code with language: ${language}`);
           const highlightedCode = Prism.highlight(html, languages[language]);
           $this.html(addLineNumbers ? highlightedCode + lineNumbersWrapper : highlightedCode);
         }
       });
 
       if (highlighted) {
+        debug(`Updating contents of ${file} with highlighted code`);
         files[file].contents = Buffer.from($.html());
+      } else {
+        debug(`No code was highlighted in ${file}`);
       }
     });
+    
+    debug('Completed metalsmith-prism plugin');
   };
 }
 
-export default metalsmithPrism;
+export { metalsmithPrism as default };

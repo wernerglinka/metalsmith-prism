@@ -17,9 +17,9 @@
   },
   "github": {
     "release": true,
-    "repo": "wernerglinka/metalsmith-optimize-html",
-    "releaseName": "metalsmith-optimize-html ${version}",
+    "repo": "wernerglinka/metalsmith-prism",
+    "releaseName": "metalsmith-prism ${version}",
     "tokenRef": "GITHUB_TOKEN",
-    "assets": ["metalsmith-optimize-html-${version}.tgz"]
+    "assets": ["metalsmith-prism-${version}.tgz"]
   }
 }

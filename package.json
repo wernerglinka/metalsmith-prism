@@ -20,8 +20,8 @@
     "format:check": "prettier --list-different \"**/*.{yml,md,js,json}\"",
     "lint": "eslint --fix .",
     "lint:check": "eslint --fix-dry-run .",
-    "release": "npm run build && node -r dotenv/config ./node_modules/.bin/release-it .",
-    "release:check": "npm run build && node -r dotenv/config ./node_modules/.bin/release-it . --dry-run",
+    "release": "npm run build && node ./release.js",
+    "release:check": "npm run build && node ./release.js --dry-run",
     "test": "c8 mocha test/index.mjs test/additional.mjs test/comprehensive.mjs -t 15000",
     "test:debug": "DEBUG=metalsmith-optimize-html:* npm test",
     "test:e2e": "serve -l 3000 test/fixtures"

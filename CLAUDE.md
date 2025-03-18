@@ -35,15 +35,18 @@ npm run release
 ```
 
 The release process:
-1. Runs linting and tests
-2. Updates the version in package.json
-3. Generates a changelog with auto-changelog
-4. Creates a git tag
-5. Creates a GitHub release with the changelog
-6. Creates an npm package (.tgz file) but does not publish it to npm
+1. Loads environment variables from .env file
+2. Runs linting and tests
+3. Updates the version in package.json
+4. Generates a changelog with auto-changelog
+5. Creates a git tag
+6. Creates a GitHub release with the changelog
+7. Creates an npm package (.tgz file) but does not publish it to npm
 
-Required environment variables:
+Required environment variables in .env file:
 - `GITHUB_TOKEN` - A GitHub personal access token with repo scope
+
+Note: The release.js script explicitly loads the .env file and checks that GITHUB_TOKEN is set before running release-it.
 
 ## Metalsmith Plugin Best Practices
 

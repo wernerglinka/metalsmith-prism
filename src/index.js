@@ -106,7 +106,7 @@ function metalsmithPrism(options = {}) {
   // Only set up the hook if line numbers are requested
   if (options.lineNumbers) {
     debug('Setting up line numbers hook');
-    Prism.hooks.add('after-tokenize', function (env) {
+    Prism.hooks.add('after-tokenize', (env) => {
       const match = env.code.match(NEW_LINE_EXP);
       const linesNum = match ? match.length + 1 : 1;
       debug(`Counted ${linesNum} lines for line numbers`);

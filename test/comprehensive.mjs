@@ -26,7 +26,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       const plugin = metalsmithPrism();
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['multiple.html'].contents.toString();
         expect(result).to.include('token keyword');  // JS highlighting
@@ -52,7 +52,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       });
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['combined-options.html'].contents.toString();
         expect(result).to.include('line-numbers');  // Line numbers added
@@ -81,7 +81,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       
       const start = process.hrtime.bigint();
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const end = process.hrtime.bigint();
         const timeMs = Number(end - start) / 1_000_000;
@@ -109,7 +109,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       const plugin = metalsmithPrism({ lineNumbers: true });
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['line-count.html'].contents.toString();
         const $ = load(result);
@@ -133,7 +133,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       const plugin = metalsmithPrism({ lineNumbers: true });
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['single-line.html'].contents.toString();
         const $ = load(result);
@@ -160,7 +160,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       const plugin = metalsmithPrism();
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['context.html'].contents.toString();
         const $ = load(result);
@@ -187,7 +187,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       const plugin = metalsmithPrism();
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['no-language-pre.html'].contents.toString();
         const $ = load(result);
@@ -229,7 +229,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       const plugin = metalsmithPrism();
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['complex-js.html'].contents.toString();
         
@@ -274,7 +274,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       const plugin = metalsmithPrism();
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['complex-css.html'].contents.toString();
         
@@ -330,7 +330,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       });
       
       plugin(files, {}, (err) => {
-        if (err) return done(err);
+        if (err) {return done(err);}
         
         const result = files['complex-html.html'].contents.toString();
         

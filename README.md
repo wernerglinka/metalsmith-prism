@@ -4,7 +4,6 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license)](http://opensource.org/licenses/MIT)
 [![NPM](http://img.shields.io/npm/v/metalsmith-prism.svg?style=flat-square&label=npm)](https://npmjs.org/package/metalsmith-prism)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/wernerglinka/metalsmith-prism/node.js.yml?branch=master&style=flat-square&label=build)](https://github.com/wernerglinka/metalsmith-prism/actions/workflows/node.js.yml)
 
 ## Dual Module Support (ESM and CommonJS)
 

@@ -191,4 +191,10 @@ function metalsmithPrism(options = {}) {
   };
 }
 
+// ESM export
 export { metalsmithPrism as default };
+
+// CommonJS export compatibility 
+if (typeof module !== 'undefined') {
+  module.exports = metalsmithPrism;
+}

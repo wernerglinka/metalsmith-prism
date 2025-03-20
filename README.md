@@ -4,6 +4,13 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license)](http://opensource.org/licenses/MIT)
 [![NPM](http://img.shields.io/npm/v/metalsmith-prism.svg?style=flat-square&label=npm)](https://npmjs.org/package/metalsmith-prism)
+[![ESM/CommonJS][modules-badge]][npm-url]
+[![Coverage][coverage-badge]][coverage-url]
+
+[coverage-badge]: https://img.shields.io/badge/coverage-95%25-brightgreen
+[coverage-url]: #test-coverage
+[modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
+[npm-url]: https://npmjs.org/package/metalsmith-prism
 
 ## Dual Module Support (ESM and CommonJS)
 
@@ -208,3 +215,15 @@ Add `metalsmith-prism` key to your `metalsmith.json` plugins key
 ## License
 
 Code released under [the MIT license](https://github.com/wernerglinka/metalsmith-prism/blob/main/LICENSE).
+
+## Test Coverage
+
+This project maintains high statement and line coverage for the source code. Coverage is verified during the release process using the c8 coverage tool.
+
+Coverage report (from latest test run):
+
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+----------|---------|----------|---------|---------|-------------------
+All files | 95 | 89.74 | 100 | 95 |
+ index.js | 95 | 89.74 | 100 | 95 | 63-64,75-77,96-98,199-200
+

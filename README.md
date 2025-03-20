@@ -226,7 +226,8 @@ This project maintains high statement and line coverage for the source code. Cov
 
 Coverage report (from latest test run):
 
-| File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s         |
-| --------- | ------- | -------- | ------- | ------- | ------------------------- |
-| All files | 95      | 89.74    | 100     | 95      |
-| index.js  | 95      | 89.74    | 100     | 95      | 63-64,75-77,96-98,199-200 |
+File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
+----------|---------|----------|---------|---------|-------------------
+All files | 95 | 89.74 | 100 | 95 |
+ index.js | 95 | 89.74 | 100 | 95 | 63-64,75-77,96-98,199-200
+

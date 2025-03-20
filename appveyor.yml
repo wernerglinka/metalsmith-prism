@@ -7,10 +7,10 @@ branches:
 
 environment:
   matrix:
-  # node.js
-    - nodejs_version: "10"
-    - nodejs_version: "12"
-    - nodejs_version: "14"
+    # node.js
+    - nodejs_version: '10'
+    - nodejs_version: '12'
+    - nodejs_version: '14'
 
 # Fix line endings on Windows
 init:
@@ -22,7 +22,7 @@ install:
   - npm install
 
 # build version format
-version: "{build}"
+version: '{build}'
 
 build: off
 

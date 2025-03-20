@@ -1,4 +1,4 @@
-/* global describe, it */
+ 
 
 import { strict as assert } from 'node:assert';
 import { fileURLToPath } from 'node:url';
@@ -49,18 +49,18 @@ const getCodeContent = (html) => {
   const $ = load(html, { decodeEntities: false });
   return $('code')
     .html()
-    .replace(/\s+/g, ' ')           // normalize all whitespace to single space
-    .replace(/>\s+</g, '><')        // remove space between tags
+    .replace(/\s+/g, ' ') // normalize all whitespace to single space
+    .replace(/>\s+</g, '><') // remove space between tags
     .replace(/\s*([=:])\s*/g, '$1') // remove space around = and :
-    .replace(/\s*([,;])/g, '$1')    // remove space before , and ;
-    .replace(/\(\s+/g, '(')         // remove space after (
-    .replace(/\s+\)/g, ')')         // remove space before )
-    .replace(/\[\s+/g, '[')         // remove space after [
-    .replace(/\s+\]/g, ']')         // remove space before ]
+    .replace(/\s*([,;])/g, '$1') // remove space before , and ;
+    .replace(/\(\s+/g, '(') // remove space after (
+    .replace(/\s+\)/g, ')') // remove space before )
+    .replace(/\[\s+/g, '[') // remove space after [
+    .replace(/\s+\]/g, ']') // remove space before ]
     .trim();
 };
 
-describe('metalsmith-prism (ESM)', function() {
+describe('metalsmith-prism (ESM)', function () {
   // Set timeout for all tests
   this.timeout(10000);
 
@@ -71,52 +71,48 @@ describe('metalsmith-prism (ESM)', function() {
   });
 
   describe('Basic Syntax Highlighting', () => {
-    it('should highlight code blocks for json, markup, ruby, and bash', done => {
+    it('should highlight code blocks for json, markup, ruby, and bash', (done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
-      metal
-        .use(metalsmithPrism())
-        .build(err => {
-          if (err) {return done(err);}
+      metal.use(metalsmithPrism()).build((err) => {
+        if (err) {
+          return done(err);
+        }
 
-          const tests = ['json', 'markup', 'ruby', 'bash'];
+        const tests = ['json', 'markup', 'ruby', 'bash'];
 
-          try {
-            tests.forEach(type => {
-              const build = readFixture('markup', `build/${type}.html`);
-              const expected = readFixture('markup', `expected/${type}.html`);
-              expect(
-                getCodeContent(build),
-                `Failed to properly highlight ${type} code`
-              ).to.be.eql(getCodeContent(expected));
-            });
-            done();
-          } catch (error) {
-            done(error);
-          }
-        });
+        try {
+          tests.forEach((type) => {
+            const build = readFixture('markup', `build/${type}.html`);
+            const expected = readFixture('markup', `expected/${type}.html`);
+            expect(getCodeContent(build), `Failed to properly highlight ${type} code`).to.be.eql(
+              getCodeContent(expected)
+            );
+          });
+          done();
+        } catch (error) {
+          done(error);
+        }
+      });
     });
 
-    it('should NOT highlight unknown language code blocks', done => {
+    it('should NOT highlight unknown language code blocks', (done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
-      metal
-        .use(metalsmithPrism())
-        .build(err => {
-          if (err) {return done(err);}
+      metal.use(metalsmithPrism()).build((err) => {
+        if (err) {
+          return done(err);
+        }
 
-          try {
-            const build = readFixture('markup', 'build/unknown.html');
-            const expected = readFixture('markup', 'expected/unknown.html');
-            expect(
-              getCodeContent(build),
-              'Unknown language code block was modified'
-            ).to.be.eql(getCodeContent(expected));
-            done();
-          } catch (error) {
-            done(error);
-          }
-        });
+        try {
+          const build = readFixture('markup', 'build/unknown.html');
+          const expected = readFixture('markup', 'expected/unknown.html');
+          expect(getCodeContent(build), 'Unknown language code block was modified').to.be.eql(getCodeContent(expected));
+          done();
+        } catch (error) {
+          done(error);
+        }
+      });
     });
   });
 
@@ -125,19 +121,22 @@ describe('metalsmith-prism (ESM)', function() {
       const metal = metalsmith(getFixturePath('preload')());
 
       metal
-        .use(metalsmithPrism({
-          preLoad: ['java']
-        }))
-        .build(err => {
-          if (err) {return done(err);}
+        .use(
+          metalsmithPrism({
+            preLoad: ['java']
+          })
+        )
+        .build((err) => {
+          if (err) {
+            return done(err);
+          }
 
           try {
             const build = readFixture('preload', 'build/scala.html');
             const expected = readFixture('preload', 'expected/scala.html');
-            expect(
-              getCodeContent(build),
-              'Scala code was not properly highlighted with Java components'
-            ).to.be.eql(getCodeContent(expected));
+            expect(getCodeContent(build), 'Scala code was not properly highlighted with Java components').to.be.eql(
+              getCodeContent(expected)
+            );
             done();
           } catch (error) {
             done(error);
@@ -151,19 +150,22 @@ describe('metalsmith-prism (ESM)', function() {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal
-        .use(metalsmithPrism({
-          decode: true
-        }))
-        .build(err => {
-          if (err) {return done(err);}
+        .use(
+          metalsmithPrism({
+            decode: true
+          })
+        )
+        .build((err) => {
+          if (err) {
+            return done(err);
+          }
 
           try {
             const build = readFixture('markup', 'build/php.html');
             const expected = readFixture('markup', 'expected/php.html');
-            expect(
-              getCodeContent(build),
-              'Basic PHP syntax was not properly highlighted'
-            ).to.be.eql(getCodeContent(expected));
+            expect(getCodeContent(build), 'Basic PHP syntax was not properly highlighted').to.be.eql(
+              getCodeContent(expected)
+            );
             done();
           } catch (error) {
             done(error);
@@ -175,20 +177,23 @@ describe('metalsmith-prism (ESM)', function() {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal
-        .use(metalsmithPrism({
-          decode: true,
-          preLoad: ['markup', 'php']
-        }))
-        .build(err => {
-          if (err) {return done(err);}
+        .use(
+          metalsmithPrism({
+            decode: true,
+            preLoad: ['markup', 'php']
+          })
+        )
+        .build((err) => {
+          if (err) {
+            return done(err);
+          }
 
           try {
             const build = readFixture('markup', 'build/php-advanced.html');
             const expected = readFixture('markup', 'expected/php-advanced.html');
-            expect(
-              getCodeContent(build),
-              'Advanced PHP features were not properly highlighted'
-            ).to.be.eql(getCodeContent(expected));
+            expect(getCodeContent(build), 'Advanced PHP features were not properly highlighted').to.be.eql(
+              getCodeContent(expected)
+            );
             done();
           } catch (error) {
             done(error);
@@ -202,19 +207,22 @@ describe('metalsmith-prism (ESM)', function() {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal
-        .use(metalsmithPrism({
-          decode: true
-        }))
-        .build(err => {
-          if (err) {return done(err);}
+        .use(
+          metalsmithPrism({
+            decode: true
+          })
+        )
+        .build((err) => {
+          if (err) {
+            return done(err);
+          }
 
           try {
             const build = readFixture('markup', 'build/markup-encoded.html');
             const expected = readFixture('markup', 'expected/markup-encoded.html');
-            expect(
-              getCodeContent(build),
-              'Encoded markup was not properly decoded'
-            ).to.be.eql(getCodeContent(expected));
+            expect(getCodeContent(build), 'Encoded markup was not properly decoded').to.be.eql(
+              getCodeContent(expected)
+            );
             done();
           } catch (error) {
             done(error);
@@ -225,42 +233,42 @@ describe('metalsmith-prism (ESM)', function() {
     it('should add language class to <pre> tag', (done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
-      metal
-        .use(metalsmithPrism())
-        .build(err => {
-          if (err) {return done(err);}
+      metal.use(metalsmithPrism()).build((err) => {
+        if (err) {
+          return done(err);
+        }
 
-          try {
-            const build = readFixture('markup', 'build/line-numbers.html');
-            const expected = readFixture('markup', 'expected/pre-classname.html');
-            expect(
-              getCodeContent(build),
-              'Language class was not added to pre tag'
-            ).to.be.eql(getCodeContent(expected));
-            done();
-          } catch (error) {
-            done(error);
-          }
-        });
+        try {
+          const build = readFixture('markup', 'build/line-numbers.html');
+          const expected = readFixture('markup', 'expected/pre-classname.html');
+          expect(getCodeContent(build), 'Language class was not added to pre tag').to.be.eql(getCodeContent(expected));
+          done();
+        } catch (error) {
+          done(error);
+        }
+      });
     });
 
     it('should add line numbers class to <pre> tag when options#lineNumbers is true', (done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal
-        .use(metalsmithPrism({
-          lineNumbers: true
-        }))
-        .build(err => {
-          if (err) {return done(err);}
+        .use(
+          metalsmithPrism({
+            lineNumbers: true
+          })
+        )
+        .build((err) => {
+          if (err) {
+            return done(err);
+          }
 
           try {
             const build = readFixture('markup', 'build/line-numbers.html');
             const expected = readFixture('markup', 'expected/line-numbers.html');
-            expect(
-              getCodeContent(build),
-              'Line numbers class was not added to pre tag'
-            ).to.be.eql(getCodeContent(expected));
+            expect(getCodeContent(build), 'Line numbers class was not added to pre tag').to.be.eql(
+              getCodeContent(expected)
+            );
             done();
           } catch (error) {
             done(error);

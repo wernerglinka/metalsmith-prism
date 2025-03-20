@@ -30,7 +30,7 @@ describe('metalsmith-prism (CommonJS)', () => {
     const plugin = metalsmithPrism();
     
     plugin(files, metalsmithMock, (err) => {
-      if (err) return done(err);
+      if (err) {return done(err);}
       
       // Check if highlighting was applied
       const result = files['test.html'].contents.toString();

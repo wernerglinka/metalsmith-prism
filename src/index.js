@@ -29,7 +29,7 @@ const isHTMLFile = (filePath) => {
 
 /**
  * Metalsmith plugin to highlight code syntax with PrismJS
- * 
+ *
  * This plugin finds all code blocks in HTML files that have language-* classes
  * and applies Prism.js syntax highlighting to them. It can also add line numbers
  * and handle HTML entity decoding.
@@ -42,7 +42,7 @@ const isHTMLFile = (filePath) => {
  * @example
  * // Basic usage
  * metalsmith.use(prism());
- * 
+ *
  * // With options
  * metalsmith.use(prism({
  *   decode: true,
@@ -53,7 +53,7 @@ const isHTMLFile = (filePath) => {
 function metalsmithPrism(options = {}) {
   // Track loaded languages to avoid duplicate loading
   const loadedLanguages = new Set();
-  
+
   // Always load PHP by default
   debug('Loading PHP by default');
   try {
@@ -62,7 +62,7 @@ function metalsmithPrism(options = {}) {
   } catch (e) {
     debug('Failed to load PHP:', e);
   }
-  
+
   if (options.preLoad) {
     debug('Preloading languages:', options.preLoad);
     options.preLoad.forEach((language) => {
@@ -118,7 +118,7 @@ function metalsmithPrism(options = {}) {
   return function (files, metalsmith, done) {
     debug('Starting metalsmith-prism plugin');
     debug('Options:', options);
-    
+
     setImmediate(done);
 
     Object.keys(files).forEach((file) => {
@@ -136,7 +136,7 @@ function metalsmithPrism(options = {}) {
         debug(`No code blocks found in ${file}`);
         return;
       }
-      
+
       debug(`Found ${code.length} code blocks in ${file}`);
 
       code.each(function () {
@@ -186,7 +186,7 @@ function metalsmithPrism(options = {}) {
         debug(`No code was highlighted in ${file}`);
       }
     });
-    
+
     debug('Completed metalsmith-prism plugin');
   };
 }
@@ -194,7 +194,7 @@ function metalsmithPrism(options = {}) {
 // ESM export
 export { metalsmithPrism as default };
 
-// CommonJS export compatibility 
+// CommonJS export compatibility
 if (typeof module !== 'undefined') {
   module.exports = metalsmithPrism;
 }

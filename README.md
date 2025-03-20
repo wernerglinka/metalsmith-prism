@@ -49,7 +49,7 @@ metalsmith(__dirname).use(
   prism({
     decode: true, // Decode HTML entities
     lineNumbers: true, // Show line numbers
-    preLoad: ['java'], // Pre-load language dependencies
+    preLoad: ['java'] // Pre-load language dependencies
   })
 );
 ```
@@ -89,6 +89,7 @@ The css files can be downloaded from the [Prism website](https://prismjs.com/dow
 ### Add `metalsmith-prism` plugin to metalsmith
 
 **ESM:**
+
 ```js
 import Metalsmith from 'metalsmith';
 import prism from 'metalsmith-prism';
@@ -97,6 +98,7 @@ Metalsmith(__dirname).use(prism()).build();
 ```
 
 **CommonJS:**
+
 ```js
 const Metalsmith = require('metalsmith');
 const prism = require('metalsmith-prism');
@@ -107,6 +109,7 @@ Metalsmith(__dirname).use(prism()).build();
 ### To use with Markdown code blocks rendered by [@metalsmith/markdown](https://github.com/metalsmith/markdown)
 
 **ESM:**
+
 ```js
 import Metalsmith from 'metalsmith';
 import markdown from '@metalsmith/markdown';
@@ -116,6 +119,7 @@ Metalsmith(__dirname).use(markdown()).use(prism()).build();
 ```
 
 **CommonJS:**
+
 ```js
 const Metalsmith = require('metalsmith');
 const markdown = require('@metalsmith/markdown');
@@ -139,7 +143,7 @@ Always decode the html entities when processing language of type `markup`
 ```js
 Metalsmith(__dirname).use(
   prism({
-    decode: true,
+    decode: true
   })
 );
 ```
@@ -151,7 +155,7 @@ Adds the additional HTML markup so line numbers can be added via the line-number
 ```javascript
 Metalsmith(__dirname).use(
   prism({
-    lineNumbers: true,
+    lineNumbers: true
   })
 );
 ```
@@ -165,7 +169,7 @@ Useful for loading syntax that extends other language components that are not au
 ```javascript
 Metalsmith(__dirname).use(
   prism({
-    preLoad: ['java', 'scala'],
+    preLoad: ['java', 'scala']
   })
 );
 ```
@@ -222,8 +226,7 @@ This project maintains high statement and line coverage for the source code. Cov
 
 Coverage report (from latest test run):
 
-File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
-----------|---------|----------|---------|---------|-------------------
-All files | 95 | 89.74 | 100 | 95 |
- index.js | 95 | 89.74 | 100 | 95 | 63-64,75-77,96-98,199-200
-
+| File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s         |
+| --------- | ------- | -------- | ------- | ------- | ------------------------- |
+| All files | 95      | 89.74    | 100     | 95      |
+| index.js  | 95      | 89.74    | 100     | 95      | 63-64,75-77,96-98,199-200 |

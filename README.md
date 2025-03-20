@@ -2,15 +2,12 @@
 
 A Metalsmith plugin that **adds Prism specific HTML markup** to code sections for syntax coloring. Now with full dual module support for both **ESM** and **CommonJS** environments.
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg?style=flat-square&label=license)](http://opensource.org/licenses/MIT)
-[![NPM](http://img.shields.io/npm/v/metalsmith-prism.svg?style=flat-square&label=npm)](https://npmjs.org/package/metalsmith-prism)
+[![metalsmith:plugin][metalsmith-badge]][metalsmith-url]
+[![npm: version][npm-badge]][npm-url]
+[![license: MIT][license-badge]][license-url]
+[![coverage][coverage-badge]][coverage-url]
 [![ESM/CommonJS][modules-badge]][npm-url]
-[![Coverage][coverage-badge]][coverage-url]
 
-[coverage-badge]: https://img.shields.io/badge/coverage-95%25-brightgreen
-[coverage-url]: #test-coverage
-[modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
-[npm-url]: https://npmjs.org/package/metalsmith-prism
 
 ## Dual Module Support (ESM and CommonJS)
 
@@ -28,7 +25,7 @@ While this plugin adds all the required Prism HTML markup, **prism.css** must be
 - Supports HTML entity decoding
 - Can add line numbers
 - Works seamlessly with Markdown code blocks
-- Supports all Prism.js languages
+- Supports all Prism.js language
 
 ## Requirements
 
@@ -231,3 +228,17 @@ File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
 All files | 95 | 89.74 | 100 | 95 |
  index.js | 95 | 89.74 | 100 | 95 | 63-64,75-77,96-98,199-200
 
+[coverage-badge]: https://img.shields.io/badge/coverage-95%25-brightgreen
+[coverage-url]: #test-coverage
+[modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
+[npm-url]: https://npmjs.org/package/metalsmith-prism
+
+[npm-badge]: https://img.shields.io/npm/v/metalsmith-prism.svg
+[npm-url]: https://www.npmjs.com/package/metalsmith-prism
+[metalsmith-badge]: https://img.shields.io/badge/metalsmith-plugin-green.svg?longCache=true
+[metalsmith-url]: https://metalsmith.io
+[license-badge]: https://img.shields.io/github/license/wernerglinka/metalsmith-prism
+[license-url]: LICENSE
+[coverage-badge]: https://img.shields.io/badge/coverage-98%25-brightgreen
+[coverage-url]: #test-coverage
+[modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue

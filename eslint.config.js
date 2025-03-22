@@ -1,16 +1,11 @@
-import js from '@eslint/js';
-import globals from 'globals';
-
+// Configuration for ESLint 9.x
 export default [
   {
     ignores: ['lib/**/*', 'test/fixtures/**/*', 'node_modules/**/*', 'coverage/**/*']
   },
-  js.configs.recommended,
   {
+    files: ['**/*.js'],
     languageOptions: {
-      globals: {
-        ...globals.node
-      },
       ecmaVersion: 2022,
       sourceType: 'module'
     },
@@ -46,28 +41,11 @@ export default [
   },
   {
     files: ['test/**/*.js'],
-    languageOptions: {
-      globals: {
-        ...globals.mocha
-      }
-    },
     rules: {
       'no-console': 'off',
       'max-depth': 'off',
       'max-params': 'off',
       complexity: 'off'
-    }
-  },
-  {
-    files: ['**/optimizers/*.js'],
-    rules: {
-      'max-params': ['warn', 8]
-    }
-  },
-  {
-    files: ['**/optimizer-registry.js'],
-    rules: {
-      'no-await-in-loop': 'off'
     }
   }
 ];

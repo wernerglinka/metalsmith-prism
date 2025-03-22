@@ -207,6 +207,9 @@ Add `metalsmith-prism` key to your `metalsmith.json` plugins key
   }
 }
 ```
+## Test Coverage
+
+This project maintains high statement and line coverage for the source code. Coverage is verified during the release process using the c8 coverage tool.
 
 ## Credits
 
@@ -216,17 +219,6 @@ Add `metalsmith-prism` key to your `metalsmith.json` plugins key
 ## License
 
 Code released under [the MIT license](https://github.com/wernerglinka/metalsmith-prism/blob/main/LICENSE).
-
-## Test Coverage
-
-This project maintains high statement and line coverage for the source code. Coverage is verified during the release process using the c8 coverage tool.
-
-Coverage report (from latest test run):
-
-File      | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s
-----------|---------|----------|---------|---------|-------------------
-All files | 95 | 89.74 | 100 | 95 |
- index.js | 95 | 89.74 | 100 | 95 | 63-64,75-77,96-98,199-200
 
 [coverage-badge]: https://img.shields.io/badge/coverage-95%25-brightgreen
 [coverage-url]: #test-coverage
@@ -239,6 +231,6 @@ All files | 95 | 89.74 | 100 | 95 |
 [metalsmith-url]: https://metalsmith.io
 [license-badge]: https://img.shields.io/github/license/wernerglinka/metalsmith-prism
 [license-url]: LICENSE
-[coverage-badge]: https://img.shields.io/badge/coverage-98%25-brightgreen
+[coverage-badge]: https://img.shields.io/badge/test%20coverage-98%25-brightgreen
 [coverage-url]: #test-coverage
 [modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue

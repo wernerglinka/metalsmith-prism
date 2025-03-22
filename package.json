@@ -4,10 +4,11 @@
   "description": "Syntax highlighting for Metalsmith HTML templates using Prism.js",
   "type": "module",
   "main": "./lib/index.cjs",
-  "module": "./lib/index.modern.js",
+  "module": "./lib/index.js",
   "exports": {
-    "import": "./lib/index.modern.js",
-    "require": "./lib/index.cjs"
+    "import": "./lib/index.js",
+    "require": "./lib/index.cjs",
+    "default": "./lib/index.js"
   },
   "engines": {
     "node": ">= 18.0.0"

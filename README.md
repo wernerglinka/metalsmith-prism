@@ -220,7 +220,7 @@ This project maintains high statement and line coverage for the source code. Cov
 
 Code released under [the MIT license](https://github.com/wernerglinka/metalsmith-prism/blob/main/LICENSE).
 
-[coverage-badge]: https://img.shields.io/badge/coverage-95%25-brightgreen
+[coverage-badge]: https://img.shields.io/badge/coverage-94%25-brightgreen
 [coverage-url]: #test-coverage
 [modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
 [npm-url]: https://npmjs.org/package/metalsmith-prism

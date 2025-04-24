@@ -8,7 +8,6 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 [![coverage][coverage-badge]][coverage-url]
 [![ESM/CommonJS][modules-badge]][npm-url]
 
-
 ## Dual Module Support (ESM and CommonJS)
 
 This plugin supports both ESM and CommonJS environments with no configuration needed:
@@ -207,6 +206,7 @@ Add `metalsmith-prism` key to your `metalsmith.json` plugins key
   }
 }
 ```
+
 ## Test Coverage
 
 This project maintains high statement and line coverage for the source code. Coverage is verified during the release process using the c8 coverage tool.
@@ -224,7 +224,6 @@ Code released under [the MIT license](https://github.com/wernerglinka/metalsmith
 [coverage-url]: #test-coverage
 [modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
 [npm-url]: https://npmjs.org/package/metalsmith-prism
-
 [npm-badge]: https://img.shields.io/npm/v/metalsmith-prism.svg
 [npm-url]: https://www.npmjs.com/package/metalsmith-prism
 [metalsmith-badge]: https://img.shields.io/badge/metalsmith-plugin-green.svg?longCache=true

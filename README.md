@@ -7,6 +7,8 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 [![license: MIT][license-badge]][license-url]
 [![coverage][coverage-badge]][coverage-url]
 [![ESM/CommonJS][modules-badge]][npm-url]
+[![Known Vulnerabilities](https://snyk.io/test/github/wernerglinka/metalsmith-prism/badge.svg)](https://snyk.io/test/github/wernerglinka/metalsmith-prism/badge)
+
 
 ## Dual Module Support (ESM and CommonJS)
 
@@ -220,16 +222,12 @@ This project maintains high statement and line coverage for the source code. Cov
 
 Code released under [the MIT license](https://github.com/wernerglinka/metalsmith-prism/blob/main/LICENSE).
 
-[coverage-badge]: https://img.shields.io/badge/coverage-94%25-brightgreen
-[coverage-url]: #test-coverage
-[modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
-[npm-url]: https://npmjs.org/package/metalsmith-prism
-[npm-badge]: https://img.shields.io/npm/v/metalsmith-prism.svg
-[npm-url]: https://www.npmjs.com/package/metalsmith-prism
 [metalsmith-badge]: https://img.shields.io/badge/metalsmith-plugin-green.svg?longCache=true
 [metalsmith-url]: https://metalsmith.io
+[npm-badge]: https://img.shields.io/npm/v/metalsmith-prism.svg
+[npm-url]: https://www.npmjs.com/package/metalsmith-prism
 [license-badge]: https://img.shields.io/github/license/wernerglinka/metalsmith-prism
 [license-url]: LICENSE
-[coverage-badge]: https://img.shields.io/badge/test%20coverage-98%25-brightgreen
+[coverage-badge]: https://img.shields.io/badge/coverage-94%25-brightgreen
 [coverage-url]: #test-coverage
 [modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue

@@ -1,0 +1,91 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+# Explicitly set permissions for the GITHUB_TOKEN
+permissions:
+  contents: write  # Needed to push changes to the repository
+  pull-requests: write  # Needed if you want to comment on PRs
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+    - run: npm install
+    - name: Build the project
+      run: npm run build
+    - name: Run tests with coverage
+      run: npm run coverage
+      continue-on-error: true
+
+    - name: Extract coverage percentage
+      id: coverage
+      run: |
+        # Make sure the coverage directory exists
+        if [ ! -f "./coverage/lcov.info" ]; then
+          echo "coverage=0" >> $GITHUB_OUTPUT
+          echo "Warning: No coverage data found. Using 0%."
+          exit 0
+        fi
+
+        # Extract coverage percentage from lcov.info
+        COVERAGE=$(node -e "try { const fs = require('fs'); const lcov = fs.readFileSync('./coverage/lcov.info', 'utf8'); const lines = lcov.split('\\n').filter(l => l.startsWith('LF:')); const totalLines = lines.reduce((sum, line) => sum + parseInt(line.split(':')[1]), 0); const coveredLines = lcov.split('\\n').filter(l => l.startsWith('LH:')).reduce((sum, line) => sum + parseInt(line.split(':')[1]), 0); const percentage = Math.round(coveredLines / totalLines * 100); console.log(percentage); } catch (e) { console.log('0'); console.error(e); }")
+        echo "coverage=$COVERAGE" >> $GITHUB_OUTPUT
+
+    - name: Update README with coverage badge
+      run: |
+        # Determine the color based on coverage percentage
+        if [ ${{ steps.coverage.outputs.coverage }} -ge 90 ]; then
+          COLOR="brightgreen"
+        elif [ ${{ steps.coverage.outputs.coverage }} -ge 80 ]; then
+          COLOR="green"
+        elif [ ${{ steps.coverage.outputs.coverage }} -ge 70 ]; then
+          COLOR="yellowgreen"
+        elif [ ${{ steps.coverage.outputs.coverage }} -ge 60 ]; then
+          COLOR="yellow"
+        elif [ ${{ steps.coverage.outputs.coverage }} -ge 50 ]; then
+          COLOR="orange"
+        else
+          COLOR="red"
+        fi
+
+        # Create the badge text
+        BADGE="[coverage-badge]: https://img.shields.io/badge/test%20coverage-${{ steps.coverage.outputs.coverage }}%25-$COLOR"
+
+        # Debug output
+        echo "Coverage: ${{ steps.coverage.outputs.coverage }}%"
+        echo "Color: $COLOR"
+        echo "Badge: $BADGE"
+
+        # Check if the placeholder exists
+        if grep -q "<!-- COVERAGE_BADGE_PLACEHOLDER -->" README.md; then
+          # Replace the placeholder with the badge definition
+          awk -v badge="$BADGE" '{gsub(/<!-- COVERAGE_BADGE_PLACEHOLDER -->/, badge); print}' README.md > README.md.new
+          mv README.md.new README.md
+        else
+          # If the placeholder doesn't exist, update the existing badge definition
+          # Use perl for more reliable multiline replacements
+          perl -i -pe "s|\\[coverage-badge\\]: .*|$BADGE|g" README.md
+        fi
+
+    - name: Commit and push the updated README
+      uses: EndBug/add-and-commit@v9
+      with:
+        default_author: github_actions
+        message: 'docs: update coverage badge [skip ci]'
+        add: 'README.md'
+        push: true
+      env:
+        # This is automatically provided by GitHub
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

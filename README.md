@@ -7,7 +7,7 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 [![license: MIT][license-badge]][license-url]
 [![coverage][coverage-badge]][coverage-url]
 [![ESM/CommonJS][modules-badge]][npm-url]
-[![Known Vulnerabilities](https://snyk.io/test/github/wernerglinka/metalsmith-prism/badge.svg)](https://snyk.io/test/github/wernerglinka/metalsmith-prism/badge)
+[![Known Vulnerabilities](https://snyk.io/test/npm/metalsmith-prism/badge.svg)](https://snyk.io/test/npm/metalsmith-prism)
 
 
 ## Dual Module Support (ESM and CommonJS)

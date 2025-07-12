@@ -53,7 +53,7 @@
   },
   "homepage": "https://github.com/wernerglinka/metalsmith-prism",
   "dependencies": {
-    "cheerio": "^1.0.0",
+    "cheerio": "^1.1.0",
     "debug": "^4.4.0",
     "dotenv": "^16.5.0",
     "he": "^1.2.0",

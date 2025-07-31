@@ -272,7 +272,7 @@ metalsmith(__dirname)
 To enable debug logs, set the DEBUG environment variable to metalsmith-prism\*:
 
 ```bash
-metalsmith.env('DEBUG', metalsmith.env('DEBUG', 'metalsmith-prism*'););
+metalsmith.env('DEBUG', 'metalsmith-prism*');
 ```
 
 ## CLI Usage

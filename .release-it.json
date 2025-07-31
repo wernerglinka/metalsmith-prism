@@ -12,7 +12,7 @@
     "tokenRef": "GH_TOKEN"
   },
   "npm": {
-    "publish": true
+    "publish": false
   },
   "hooks": {
     "after:bump": "npm run changelog && git add CHANGELOG.md"

@@ -12,6 +12,7 @@
     "releaseName": "v${version}",
     "draft": false,
     "autoGenerate": false,
+    "releaseNotes": "npx auto-changelog -u --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)' --stdout",
     "tokenRef": "GH_TOKEN"
   },
   "npm": {

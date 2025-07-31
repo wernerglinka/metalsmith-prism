@@ -11,7 +11,7 @@
     "release": true,
     "releaseName": "v${version}",
     "draft": false,
-    "autoGenerate": true,
+    "autoGenerate": false,
     "tokenRef": "GH_TOKEN"
   },
   "npm": {

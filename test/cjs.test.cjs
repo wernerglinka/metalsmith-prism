@@ -1,6 +1,7 @@
 /* global describe, it */
 
 const assert = require('node:assert').strict;
+const Metalsmith = require('metalsmith');
 
 // Import the plugin using CommonJS format
 const metalsmithPrism = require('../lib/index.cjs');
@@ -21,15 +22,13 @@ describe('metalsmith-prism (CommonJS)', () => {
       }
     };
     
-    // Create basic metalsmith mock
-    const metalsmithMock = {
-      debug: () => () => {}
-    };
+    // Create actual metalsmith instance
+    const metalsmith = Metalsmith(__dirname);
     
     // Run the plugin directly
     const plugin = metalsmithPrism();
     
-    plugin(files, metalsmithMock, (err) => {
+    plugin(files, metalsmith, (err) => {
       if (err) {return done(err);}
       
       // Check if highlighting was applied

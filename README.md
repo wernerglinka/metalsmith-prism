@@ -9,7 +9,6 @@ A Metalsmith plugin that **adds Prism specific HTML markup** to code sections fo
 [![ESM/CommonJS][modules-badge]][npm-url]
 [![Known Vulnerabilities](https://snyk.io/test/npm/metalsmith-prism/badge.svg)](https://snyk.io/test/npm/metalsmith-prism)
 
-
 ## Dual Module Support (ESM and CommonJS)
 
 This plugin supports both ESM and CommonJS environments with no configuration needed:
@@ -172,26 +171,108 @@ Metalsmith(__dirname).use(
 );
 ```
 
+## Examples
+
+### Basic Usage
+
+Transform a simple code block with JavaScript:
+
+**Input HTML:**
+
+```html
+<pre><code class="language-javascript">
+const greeting = 'Hello, World!';
+console.log(greeting);
+</code></pre>
+```
+
+**Output HTML (with syntax highlighting):**
+
+```html
+<pre class="language-javascript"><code class="language-javascript">
+<span class="token keyword">const</span> greeting <span class="token operator">=</span> <span class="token string">'Hello, World!'</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>greeting<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+```
+
+### With Line Numbers
+
+Enable line numbers for longer code examples:
+
+```javascript
+metalsmith(__dirname)
+  .use(
+    prism({
+      lineNumbers: true
+    })
+  )
+  .build();
+```
+
+This adds the `line-numbers` class and line number markup to your code blocks.
+
+### Working with Markdown
+
+When using with @metalsmith/markdown, code blocks in markdown files are automatically processed:
+
+**Markdown file:**
+
+````markdown
+```python
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n-1) + fibonacci(n-2)
+```
+````
+
+**Build configuration:**
+
+```javascript
+metalsmith(__dirname)
+  .use(markdown())
+  .use(
+    prism({
+      preLoad: ['python'] // Ensure Python support is loaded
+    })
+  )
+  .build();
+```
+
+### Preloading Languages
+
+For better performance with known languages, preload them:
+
+```javascript
+metalsmith(__dirname)
+  .use(
+    prism({
+      preLoad: ['python', 'ruby', 'go', 'rust']
+    })
+  )
+  .build();
+```
+
+### Handling Special Characters
+
+For code with HTML entities, use the decode option:
+
+```javascript
+metalsmith(__dirname)
+  .use(
+    prism({
+      decode: true // Properly handle &lt;, &gt;, &amp; etc.
+    })
+  )
+  .build();
+```
+
 ## Debug
 
-To enable debug logs, set the `DEBUG` environment variable to `metalsmith-prism`:
-
-Linux/Mac:
+To enable debug logs, set the DEBUG environment variable to metalsmith-prism\*:
 
 ```bash
-DEBUG=metalsmith-prism npm test
-```
-
-Windows:
-
-```bash
-set "DEBUG=metalsmith-prism" && npm test
-```
-
-Or use the test:debug script:
-
-```bash
-npm run test:debug
+metalsmith.env('DEBUG', metalsmith.env('DEBUG', 'metalsmith-prism*'););
 ```
 
 ## CLI Usage

@@ -1,10 +1,10 @@
 // Configuration for ESLint 9.x
 export default [
   {
-    ignores: [ 'lib/**/*', 'test/fixtures/**/*', 'node_modules/**/*', 'coverage/**/*' ]
+    ignores: ['lib/**/*', 'test/fixtures/**/*', 'node_modules/**/*', 'coverage/**/*']
   },
   {
-    files: [ '**/*.js' ],
+    files: ['**/*.js'],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: 'module'
@@ -13,7 +13,7 @@ export default [
       'no-console': [
         'warn',
         {
-          allow: [ 'warn', 'error' ]
+          allow: ['warn', 'error']
         }
       ],
       'prefer-const': 'error',
@@ -24,9 +24,8 @@ export default [
           argsIgnorePattern: '^_'
         }
       ],
-      'space-in-parens': [ 'error', 'always' ],
-      eqeqeq: [ 'error', 'always' ],
-      curly: [ 'error', 'all' ],
+      eqeqeq: ['error', 'always'],
+      curly: ['error', 'all'],
       'dot-notation': 'error',
       'no-multi-assign': 'error',
       'prefer-template': 'error',
@@ -35,13 +34,13 @@ export default [
       'no-useless-return': 'error',
       'no-throw-literal': 'error',
       'no-await-in-loop': 'warn',
-      'max-depth': [ 'warn', 4 ],
-      'max-params': [ 'warn', 4 ],
-      complexity: [ 'warn', 15 ]
+      'max-depth': ['warn', 4],
+      'max-params': ['warn', 7],
+      complexity: ['warn', 15]
     }
   },
   {
-    files: [ 'test/**/*.js' ],
+    files: ['test/**/*.js'],
     rules: {
       'no-console': 'off',
       'max-depth': 'off',

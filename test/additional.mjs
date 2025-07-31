@@ -1,10 +1,15 @@
 /* global describe, it, beforeEach, afterEach */
 
 import * as chai from 'chai';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+import Metalsmith from 'metalsmith';
 const { expect } = chai;
 
 import metalsmithPrism from '../src/index.js';
-import debugLib from 'debug';
+
+// Get current directory for ES modules
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe('metalsmith-prism additional tests', function() {
   // Set timeout for all tests
@@ -37,7 +42,9 @@ describe('metalsmith-prism additional tests', function() {
         preLoad: ['nonexistent-language']
       });
       
-      plugin(files, {}, (err) => {
+      
+      const metalsmith = Metalsmith(__dirname);
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         // No error should be thrown
         done();
@@ -66,7 +73,9 @@ describe('metalsmith-prism additional tests', function() {
         preLoad: ['markup', 'markup', 'javascript', 'javascript']
       });
       
-      plugin(files, {}, (err) => {
+      
+      const metalsmith = Metalsmith(__dirname);
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         // Expect fewer loads than requested languages (due to deduplication)
         expect(loadCount).to.be.at.most(2);
@@ -90,7 +99,9 @@ describe('metalsmith-prism additional tests', function() {
       // Run the plugin directly
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
+      
+      const metalsmith = Metalsmith(__dirname);
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         // Should not throw and leave content unchanged since no valid language classes
         expect(files['malformed.html'].contents.toString()).to.include('No language specified');
@@ -111,7 +122,9 @@ describe('metalsmith-prism additional tests', function() {
       // Run the plugin directly
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
+      
+      const metalsmith = Metalsmith(__dirname);
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         // Content should remain unchanged
         expect(files['test.js'].contents.toString()).to.equal(jsContent);
@@ -131,7 +144,9 @@ describe('metalsmith-prism additional tests', function() {
       // Run the plugin directly
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
+      
+      const metalsmith = Metalsmith(__dirname);
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         // Content should remain unchanged
         expect(files['no-code.html'].contents.toString()).to.equal(htmlNoCode);
@@ -152,7 +167,9 @@ describe('metalsmith-prism additional tests', function() {
       // Run the plugin directly
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
+      
+      const metalsmith = Metalsmith(__dirname);
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         // Should highlight as markup
@@ -181,7 +198,9 @@ describe('metalsmith-prism additional tests', function() {
         decode: true
       });
       
-      plugin(files, {}, (err) => {
+      
+      const metalsmith = Metalsmith(__dirname);
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['entities.html'].contents.toString();
@@ -192,19 +211,21 @@ describe('metalsmith-prism additional tests', function() {
       });
     });
 
-    it('should generate debug logs when DEBUG environment variable is set', (done) => {
-      // Create a debug instance
-      const debug = debugLib('metalsmith-prism');
-      
-      // Save original debug status and override
-      const originalEnabled = debug.enabled;
-      debug.enabled = true;
-      
+    it('should generate debug logs when metalsmith debug is enabled', (done) => {
       // Create a logging spy
       let captured = false;
-      debug.log = () => {
-        captured = true;
-        debug.log = () => {}; // Only capture once
+      
+      // Create metalsmith mock with debug function that captures calls
+      const metalsmithMock = {
+        debug: () => {
+          const debugFn = () => {
+            captured = true;
+          };
+          debugFn.error = () => { captured = true; };
+          debugFn.warn = () => { captured = true; };
+          debugFn.info = () => { captured = true; };
+          return debugFn;
+        }
       };
       
       // Create HTML file
@@ -217,16 +238,11 @@ describe('metalsmith-prism additional tests', function() {
       // Run the plugin directly
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
-        // Restore original debug status
-        debug.enabled = originalEnabled;
-        
+      plugin(files, metalsmithMock, (err) => {
         if (err) {return done(err);}
         
-        // Our mock should have captured debug output if enabled
-        if (debug.enabled) {
-          expect(captured).to.be.true;
-        }
+        // Debug should have been called
+        expect(captured).to.be.true;
         
         done();
       });

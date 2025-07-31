@@ -2,9 +2,15 @@
 
 import * as chai from 'chai';
 import { load } from 'cheerio';
+import { fileURLToPath } from 'node:url';
+import { dirname } from 'node:path';
+import Metalsmith from 'metalsmith';
 const { expect } = chai;
 
 import metalsmithPrism from '../src/index.js';
+
+// Get current directory for ES modules
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 describe('metalsmith-prism comprehensive tests', function() {
   // Set timeout for all tests
@@ -12,6 +18,7 @@ describe('metalsmith-prism comprehensive tests', function() {
 
   describe('Real-world Usage Scenarios', () => {
     it('should process multiple code blocks with different languages in one file', (done) => {
+      // Create files object with test content
       const files = {
         'multiple.html': {
           contents: Buffer.from(`
@@ -23,9 +30,11 @@ describe('metalsmith-prism comprehensive tests', function() {
         }
       };
       
+      // Create metalsmith instance and run plugin directly
+      const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['multiple.html'].contents.toString();
@@ -51,7 +60,9 @@ describe('metalsmith-prism comprehensive tests', function() {
         preLoad: ['markup']
       });
       
-      plugin(files, {}, (err) => {
+      const metalsmith = Metalsmith(__dirname);
+      
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['combined-options.html'].contents.toString();
@@ -80,7 +91,9 @@ describe('metalsmith-prism comprehensive tests', function() {
       const plugin = metalsmithPrism();
       
       const start = process.hrtime.bigint();
-      plugin(files, {}, (err) => {
+      const metalsmith = Metalsmith(__dirname);
+      
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const end = process.hrtime.bigint();
@@ -108,7 +121,9 @@ describe('metalsmith-prism comprehensive tests', function() {
       
       const plugin = metalsmithPrism({ lineNumbers: true });
       
-      plugin(files, {}, (err) => {
+      const metalsmith = Metalsmith(__dirname);
+      
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['line-count.html'].contents.toString();
@@ -132,7 +147,9 @@ describe('metalsmith-prism comprehensive tests', function() {
       
       const plugin = metalsmithPrism({ lineNumbers: true });
       
-      plugin(files, {}, (err) => {
+      const metalsmith = Metalsmith(__dirname);
+      
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['single-line.html'].contents.toString();
@@ -157,9 +174,10 @@ describe('metalsmith-prism comprehensive tests', function() {
         }
       };
       
+      const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['context.html'].contents.toString();
@@ -184,9 +202,10 @@ describe('metalsmith-prism comprehensive tests', function() {
         }
       };
       
+      const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['no-language-pre.html'].contents.toString();
@@ -226,9 +245,10 @@ describe('metalsmith-prism comprehensive tests', function() {
         }
       };
       
+      const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['complex-js.html'].contents.toString();
@@ -271,9 +291,10 @@ describe('metalsmith-prism comprehensive tests', function() {
         }
       };
       
+      const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
       
-      plugin(files, {}, (err) => {
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['complex-css.html'].contents.toString();
@@ -329,7 +350,9 @@ describe('metalsmith-prism comprehensive tests', function() {
         decode: true  // HTML examples often need decoding
       });
       
-      plugin(files, {}, (err) => {
+      const metalsmith = Metalsmith(__dirname);
+      
+      plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         
         const result = files['complex-html.html'].contents.toString();

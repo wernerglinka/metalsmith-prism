@@ -1,20 +1,29 @@
 {
   "git": {
-    "commitMessage": "Release ${version}",
-    "tagAnnotation": "Release ${version}",
-    "push": true,
-    "pushRepo": "origin"
+    "commitMessage": "chore: release v${version}",
+    "requireCleanWorkingDir": true,
+    "requireBranch": "master",
+    "tag": true,
+    "tagName": "v${version}",
+    "push": true
   },
   "github": {
     "release": true,
-    "releaseName": "Release ${version}",
+    "releaseName": "v${version}",
+    "draft": false,
     "autoGenerate": true,
     "tokenRef": "GH_TOKEN"
   },
   "npm": {
-    "publish": false
+    "publish": false,
+    "publishPath": "."
   },
   "hooks": {
-    "after:bump": "npm run changelog && git add CHANGELOG.md"
+    "before:init": [
+      "gh auth status",
+      "npm test",
+      "npm run lint"
+    ],
+    "after:release": "echo \"✅ Successfully released ${name} v${version}\""
   }
 }

@@ -2,8 +2,6 @@ import { strict as assert } from 'node:assert';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
 import { readFileSync } from 'node:fs';
-import * as chai from 'chai';
-const { expect } = chai;
 import { load } from 'cheerio';
 
 import metalsmith from 'metalsmith';
@@ -83,8 +81,10 @@ describe('metalsmith-prism (ESM)', function () {
           tests.forEach((type) => {
             const build = readFixture('markup', `build/${type}.html`);
             const expected = readFixture('markup', `expected/${type}.html`);
-            expect(getCodeContent(build), `Failed to properly highlight ${type} code`).to.be.eql(
-              getCodeContent(expected)
+            assert.deepStrictEqual(
+              getCodeContent(build),
+              getCodeContent(expected),
+              `Failed to properly highlight ${type} code`
             );
           });
           done();
@@ -105,7 +105,11 @@ describe('metalsmith-prism (ESM)', function () {
         try {
           const build = readFixture('markup', 'build/unknown.html');
           const expected = readFixture('markup', 'expected/unknown.html');
-          expect(getCodeContent(build), 'Unknown language code block was modified').to.be.eql(getCodeContent(expected));
+          assert.deepStrictEqual(
+            getCodeContent(build),
+            getCodeContent(expected),
+            'Unknown language code block was modified'
+          );
           done();
         } catch (error) {
           done(error);
@@ -132,8 +136,10 @@ describe('metalsmith-prism (ESM)', function () {
           try {
             const build = readFixture('preload', 'build/scala.html');
             const expected = readFixture('preload', 'expected/scala.html');
-            expect(getCodeContent(build), 'Scala code was not properly highlighted with Java components').to.be.eql(
-              getCodeContent(expected)
+            assert.deepStrictEqual(
+              getCodeContent(build),
+              getCodeContent(expected),
+              'Scala code was not properly highlighted with Java components'
             );
             done();
           } catch (error) {
@@ -161,8 +167,10 @@ describe('metalsmith-prism (ESM)', function () {
           try {
             const build = readFixture('markup', 'build/php.html');
             const expected = readFixture('markup', 'expected/php.html');
-            expect(getCodeContent(build), 'Basic PHP syntax was not properly highlighted').to.be.eql(
-              getCodeContent(expected)
+            assert.deepStrictEqual(
+              getCodeContent(build),
+              getCodeContent(expected),
+              'Basic PHP syntax was not properly highlighted'
             );
             done();
           } catch (error) {
@@ -189,8 +197,10 @@ describe('metalsmith-prism (ESM)', function () {
           try {
             const build = readFixture('markup', 'build/php-advanced.html');
             const expected = readFixture('markup', 'expected/php-advanced.html');
-            expect(getCodeContent(build), 'Advanced PHP features were not properly highlighted').to.be.eql(
-              getCodeContent(expected)
+            assert.deepStrictEqual(
+              getCodeContent(build),
+              getCodeContent(expected),
+              'Advanced PHP features were not properly highlighted'
             );
             done();
           } catch (error) {
@@ -218,8 +228,10 @@ describe('metalsmith-prism (ESM)', function () {
           try {
             const build = readFixture('markup', 'build/markup-encoded.html');
             const expected = readFixture('markup', 'expected/markup-encoded.html');
-            expect(getCodeContent(build), 'Encoded markup was not properly decoded').to.be.eql(
-              getCodeContent(expected)
+            assert.deepStrictEqual(
+              getCodeContent(build),
+              getCodeContent(expected),
+              'Encoded markup was not properly decoded'
             );
             done();
           } catch (error) {
@@ -239,7 +251,11 @@ describe('metalsmith-prism (ESM)', function () {
         try {
           const build = readFixture('markup', 'build/line-numbers.html');
           const expected = readFixture('markup', 'expected/pre-classname.html');
-          expect(getCodeContent(build), 'Language class was not added to pre tag').to.be.eql(getCodeContent(expected));
+          assert.deepStrictEqual(
+            getCodeContent(build),
+            getCodeContent(expected),
+            'Language class was not added to pre tag'
+          );
           done();
         } catch (error) {
           done(error);
@@ -264,8 +280,10 @@ describe('metalsmith-prism (ESM)', function () {
           try {
             const build = readFixture('markup', 'build/line-numbers.html');
             const expected = readFixture('markup', 'expected/line-numbers.html');
-            expect(getCodeContent(build), 'Line numbers class was not added to pre tag').to.be.eql(
-              getCodeContent(expected)
+            assert.deepStrictEqual(
+              getCodeContent(build),
+              getCodeContent(expected),
+              'Line numbers class was not added to pre tag'
             );
             done();
           } catch (error) {

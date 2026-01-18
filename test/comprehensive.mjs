@@ -1,11 +1,10 @@
 /* global describe, it */
 
-import * as chai from 'chai';
+import { strict as assert } from 'node:assert';
 import { load } from 'cheerio';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 import Metalsmith from 'metalsmith';
-const { expect } = chai;
 
 import metalsmithPrism from '../src/index.js';
 
@@ -38,9 +37,9 @@ describe('metalsmith-prism comprehensive tests', function() {
         if (err) {return done(err);}
         
         const result = files['multiple.html'].contents.toString();
-        expect(result).to.include('token keyword');  // JS highlighting
-        expect(result).to.include('token property');  // CSS highlighting
-        expect(result).to.include('token tag');  // HTML highlighting
+        assert.ok(result.includes('token keyword'), 'JS highlighting');
+        assert.ok(result.includes('token property'), 'CSS highlighting');
+        assert.ok(result.includes('token tag'), 'HTML highlighting');
         done();
       });
     });
@@ -66,9 +65,9 @@ describe('metalsmith-prism comprehensive tests', function() {
         if (err) {return done(err);}
         
         const result = files['combined-options.html'].contents.toString();
-        expect(result).to.include('line-numbers');  // Line numbers added
-        expect(result).to.include('token tag');  // Highlighting applied
-        expect(result).to.include('line-numbers-rows');  // Line number markup added
+        assert.ok(result.includes('line-numbers'), 'Line numbers added');
+        assert.ok(result.includes('token tag'), 'Highlighting applied');
+        assert.ok(result.includes('line-numbers-rows'), 'Line number markup added');
         done();
       });
     });
@@ -100,10 +99,10 @@ describe('metalsmith-prism comprehensive tests', function() {
         const timeMs = Number(end - start) / 1_000_000;
         
         // Should complete in reasonable time (adjust threshold as needed)
-        expect(timeMs).to.be.lessThan(5000);
+        assert.ok(timeMs < 5000, `Expected ${timeMs}ms to be less than 5000ms`);
         // Check for token class in the output
         const result = files['large.html'].contents.toString();
-        expect(result).to.include('class="token');
+        assert.ok(result.includes('class="token'), 'Should have token classes');
         done();
       });
     });
@@ -129,9 +128,9 @@ describe('metalsmith-prism comprehensive tests', function() {
         const result = files['line-count.html'].contents.toString();
         const $ = load(result);
         const lineRows = $('.line-numbers-rows span');
-        
+
         // Should have 5 line number placeholders
-        expect(lineRows.length).to.equal(5);
+        assert.strictEqual(lineRows.length, 5);
         done();
       });
     });
@@ -155,9 +154,9 @@ describe('metalsmith-prism comprehensive tests', function() {
         const result = files['single-line.html'].contents.toString();
         const $ = load(result);
         const lineRows = $('.line-numbers-rows span');
-        
+
         // Should have 1 line number placeholder
-        expect(lineRows.length).to.equal(1);
+        assert.strictEqual(lineRows.length, 1);
         done();
       });
     });
@@ -182,12 +181,12 @@ describe('metalsmith-prism comprehensive tests', function() {
         
         const result = files['context.html'].contents.toString();
         const $ = load(result);
-        
+
         // Code within pre should be highlighted
-        expect($('pre code').html()).to.include('token keyword');
-        
+        assert.ok($('pre code').html().includes('token keyword'), 'Code within pre should be highlighted');
+
         // Code outside pre should not be highlighted (even if it looks like code)
-        expect($('div code').text()).to.equal('const y = 2;');
+        assert.strictEqual($('div code').text(), 'const y = 2;');
         done();
       });
     });
@@ -210,10 +209,10 @@ describe('metalsmith-prism comprehensive tests', function() {
         
         const result = files['no-language-pre.html'].contents.toString();
         const $ = load(result);
-        
+
         // Code without language class should not be highlighted
-        expect($('code').first().html()).to.equal('console.log("no language");');
-        expect($('code').last().html()).to.equal('console.log("other class");');
+        assert.strictEqual($('code').first().html(), 'console.log("no language");');
+        assert.strictEqual($('code').last().html(), 'console.log("other class");');
         done();
       });
     });
@@ -252,11 +251,11 @@ describe('metalsmith-prism comprehensive tests', function() {
         if (err) {return done(err);}
         
         const result = files['complex-js.html'].contents.toString();
-        
+
         // Should highlight classes, keywords, etc.
-        expect(result).to.include('token keyword');
-        expect(result).to.include('token class-name');
-        expect(result).to.include('token function');
+        assert.ok(result.includes('token keyword'), 'Should highlight keywords');
+        assert.ok(result.includes('token class-name'), 'Should highlight class names');
+        assert.ok(result.includes('token function'), 'Should highlight functions');
         done();
       });
     });
@@ -298,11 +297,11 @@ describe('metalsmith-prism comprehensive tests', function() {
         if (err) {return done(err);}
         
         const result = files['complex-css.html'].contents.toString();
-        
+
         // Should highlight selectors, properties, functions, etc.
-        expect(result).to.include('token selector');
-        expect(result).to.include('token property');
-        expect(result).to.include('token function');
+        assert.ok(result.includes('token selector'), 'Should highlight selectors');
+        assert.ok(result.includes('token property'), 'Should highlight properties');
+        assert.ok(result.includes('token function'), 'Should highlight functions');
         done();
       });
     });
@@ -356,11 +355,11 @@ describe('metalsmith-prism comprehensive tests', function() {
         if (err) {return done(err);}
         
         const result = files['complex-html.html'].contents.toString();
-        
+
         // Should highlight tags, attributes, etc.
-        expect(result).to.include('token tag');
-        expect(result).to.include('token attr-name');
-        expect(result).to.include('token attr-value');
+        assert.ok(result.includes('token tag'), 'Should highlight tags');
+        assert.ok(result.includes('token attr-name'), 'Should highlight attr names');
+        assert.ok(result.includes('token attr-value'), 'Should highlight attr values');
         done();
       });
     });

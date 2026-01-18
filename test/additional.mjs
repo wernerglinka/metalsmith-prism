@@ -1,10 +1,9 @@
 /* global describe, it, beforeEach, afterEach */
 
-import * as chai from 'chai';
+import { strict as assert } from 'node:assert';
 import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 import Metalsmith from 'metalsmith';
-const { expect } = chai;
 
 import metalsmithPrism from '../src/index.js';
 
@@ -78,7 +77,7 @@ describe('metalsmith-prism additional tests', function() {
       plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         // Expect fewer loads than requested languages (due to deduplication)
-        expect(loadCount).to.be.at.most(2);
+        assert.ok(loadCount <= 2, `Expected loadCount (${loadCount}) to be at most 2`);
         done();
       });
     });
@@ -104,8 +103,9 @@ describe('metalsmith-prism additional tests', function() {
       plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         // Should not throw and leave content unchanged since no valid language classes
-        expect(files['malformed.html'].contents.toString()).to.include('No language specified');
-        expect(files['malformed.html'].contents.toString()).to.include('Missing dash');
+        const content = files['malformed.html'].contents.toString();
+        assert.ok(content.includes('No language specified'), 'Should include "No language specified"');
+        assert.ok(content.includes('Missing dash'), 'Should include "Missing dash"');
         done();
       });
     });
@@ -127,7 +127,7 @@ describe('metalsmith-prism additional tests', function() {
       plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         // Content should remain unchanged
-        expect(files['test.js'].contents.toString()).to.equal(jsContent);
+        assert.strictEqual(files['test.js'].contents.toString(), jsContent);
         done();
       });
     });
@@ -149,7 +149,7 @@ describe('metalsmith-prism additional tests', function() {
       plugin(files, metalsmith, (err) => {
         if (err) {return done(err);}
         // Content should remain unchanged
-        expect(files['no-code.html'].contents.toString()).to.equal(htmlNoCode);
+        assert.strictEqual(files['no-code.html'].contents.toString(), htmlNoCode);
         done();
       });
     });
@@ -174,9 +174,9 @@ describe('metalsmith-prism additional tests', function() {
         
         // Should highlight as markup
         const result = files['unknown-lang.html'].contents.toString();
-        
+
         // Should have some highlighting applied (at least parent class)
-        expect(result).to.include('class="language-unknown"');
+        assert.ok(result.includes('class="language-unknown"'), 'Should have language-unknown class');
         done();
       });
     });
@@ -204,9 +204,9 @@ describe('metalsmith-prism additional tests', function() {
         if (err) {return done(err);}
         
         const result = files['entities.html'].contents.toString();
-        
+
         // Should have decoded and highlighted the HTML
-        expect(result).to.include('class="token tag"');
+        assert.ok(result.includes('class="token tag"'), 'Should have token tag class');
         done();
       });
     });
@@ -242,7 +242,7 @@ describe('metalsmith-prism additional tests', function() {
         if (err) {return done(err);}
         
         // Debug should have been called
-        expect(captured).to.be.true;
+        assert.strictEqual(captured, true, 'Debug should have been called');
         
         done();
       });

@@ -30,8 +30,7 @@
     "test:coverage": "c8 npm test",
     "test:unit": "mocha 'test/unit/**/*.js' -t 5000",
     "test:esm": "c8 --include=src/**/*.js mocha 'test/index.js' 'test/comprehensive.mjs' 'test/additional.mjs' -t 15000",
-    "test:cjs": "c8 --include=src/**/*.js mocha test/cjs.test.cjs -t 15000",
-    "depcheck": "depcheck"
+    "test:cjs": "c8 --include=src/**/*.js mocha test/cjs.test.cjs -t 15000"
   },
   "repository": {
     "type": "git",
@@ -56,9 +55,9 @@
   },
   "homepage": "https://github.com/wernerglinka/metalsmith-prism",
   "dependencies": {
-    "cheerio": "1.1.2",
+    "cheerio": "1.2.0",
     "he": "^1.2.0",
-    "metalsmith": "^2.5.0",
+    "metalsmith": "^2.6.3",
     "prismjs": "^1.30.0"
   },
   "devDependencies": {
@@ -67,11 +66,11 @@
     "eslint": "9.39.2",
     "eslint-config-prettier": "10.1.8",
     "eslint-plugin-prettier": "5.5.5",
-    "globals": "17.0.0",
+    "globals": "17.3.0",
     "microbundle": "^0.15.1",
     "mocha": "11.7.5",
-    "prettier": "3.8.0",
-    "release-it": "19.2.3"
+    "prettier": "3.8.1",
+    "release-it": "19.2.4"
   },
   "peerDependencies": {
     "metalsmith": "^2.5.0"

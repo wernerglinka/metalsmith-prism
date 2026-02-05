@@ -19,7 +19,7 @@ else
     if [ -n "$NOTES" ]; then
         echo "$NOTES"
     else
-        # Fallback: show all commits when everything is filtered out
-        git log --pretty=format:"- %s (\`%h\`)" "${LATEST_TAG}..HEAD"
+        # Fallback: maintenance release when all commits are filtered out
+        echo "- Project Maintenance"
     fi
 fi

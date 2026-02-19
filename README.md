@@ -309,6 +309,6 @@ Code released under [the MIT license](https://github.com/wernerglinka/metalsmith
 [npm-url]: https://www.npmjs.com/package/metalsmith-prism
 [license-badge]: https://img.shields.io/github/license/wernerglinka/metalsmith-prism
 [license-url]: LICENSE
-[coverage-badge]: https://img.shields.io/badge/test%20coverage-94%25-brightgreen
+[coverage-badge]: https://img.shields.io/badge/test%20coverage-93%25-brightgreen
 [coverage-url]: #test-coverage
 [modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue

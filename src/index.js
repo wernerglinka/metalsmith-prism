@@ -132,12 +132,15 @@ const metalsmithPrism = (options = {}) => {
       });
     }
 
-    // Call done asynchronously to avoid blocking
-    setImmediate(done);
-
     try {
       Object.keys(files).forEach((file) => {
         if (!isHTMLFile(file)) {
+          return;
+        }
+
+        // Validate file contents before processing
+        if (!files[file].contents || !Buffer.isBuffer(files[file].contents)) {
+          debug(`Skipping ${file}: invalid or missing file contents`);
           return;
         }
 
@@ -203,13 +206,19 @@ const metalsmithPrism = (options = {}) => {
       });
 
       debug('Completed metalsmith-prism plugin');
+      done();
     } catch (error) {
-      debug.error('Error in metalsmith-prism plugin:', error);
-      // We can't call done(error) here because done has already been called
+      debug('Error in metalsmith-prism plugin:', error);
       console.error('Error processing files:', error);
+      done(error);
     }
   };
 };
+
+// Set function name for better debugging
+Object.defineProperty(metalsmithPrism, 'name', {
+  value: 'metalsmith-prism'
+});
 
 // ESM export
 export default metalsmithPrism;

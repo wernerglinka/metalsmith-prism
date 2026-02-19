@@ -1,30 +1,20 @@
 {
+  "hooks": {
+    "before:init": ["npm run lint", "npm test"],
+    "after:bump": "npx auto-changelog -p --commit-limit false --ignore-commit-pattern '^((dev|chore|ci):|Release)' && git add CHANGELOG.md",
+    "after:release": "echo Successfully released ${name} v${version} to ${repo.repository}."
+  },
   "git": {
-    "commitMessage": "chore: release v${version}",
-    "requireCleanWorkingDir": true,
-    "requireBranch": "master",
-    "tag": true,
-    "tagName": "v${version}",
-    "push": true
+    "commitMessage": "Release ${version}",
+    "tagAnnotation": "Release ${version}"
+  },
+  "npm": {
+    "publish": false
   },
   "github": {
     "release": true,
-    "releaseName": "v${version}",
-    "draft": false,
-    "autoGenerate": false,
-    "releaseNotes": "./scripts/release-notes.sh",
-    "tokenRef": "GH_TOKEN"
-  },
-  "npm": {
-    "publish": false,
-    "publishPath": "."
-  },
-  "hooks": {
-    "before:init": [
-      "gh auth status",
-      "npm test",
-      "npm run lint"
-    ],
-    "after:release": "echo \"✅ Successfully released ${name} v${version}\""
+    "releaseName": "metalsmith-prism ${version}",
+    "tokenRef": "GH_TOKEN",
+    "autoGenerate": true
   }
 }

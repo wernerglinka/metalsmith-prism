@@ -42,7 +42,7 @@ if [ -z "$GH_TOKEN" ]; then
     exit 1
 fi
 
-echo "🚀 Starting $RELEASE_TYPE release..."
+echo "Starting $RELEASE_TYPE release..."
 
 # Run release-it with the specified type and any additional options
 npx release-it "$RELEASE_TYPE" "$@"
@@ -50,4 +50,4 @@ npx release-it "$RELEASE_TYPE" "$@"
 # Clear the token from environment
 unset GH_TOKEN
 
-echo "✅ Release completed!"
+echo "Release completed!"

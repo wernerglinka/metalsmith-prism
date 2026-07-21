@@ -62,6 +62,9 @@ const metalsmithPrism = (options = {}) => {
   // Set up line numbers functionality
   const NEW_LINE_EXP = /\n(?!$)/g;
   let lineNumbersWrapper;
+  // Guard so the global Prism hook is registered at most once per plugin
+  // instance, even when the build runs repeatedly (e.g. watch mode).
+  let lineNumbersHookAdded = false;
 
   return (files, metalsmith, done) => {
     // Get debug instance from metalsmith
@@ -120,8 +123,10 @@ const metalsmithPrism = (options = {}) => {
       }
     };
 
-    // Only set up the hook if line numbers are requested
-    if (opts.lineNumbers) {
+    // Only set up the hook if line numbers are requested, and only once per
+    // instance so repeated builds don't stack duplicate hooks on Prism.
+    if (opts.lineNumbers && !lineNumbersHookAdded) {
+      lineNumbersHookAdded = true;
       debug('Setting up line numbers hook');
       Prism.hooks.add('after-tokenize', (env) => {
         const match = env.code.match(NEW_LINE_EXP);

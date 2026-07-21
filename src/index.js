@@ -69,7 +69,7 @@ const metalsmithPrism = (options = {}) => {
   return (files, metalsmith, done) => {
     // Get debug instance from metalsmith
     const debug = metalsmith.debug('metalsmith-prism');
-    
+
     debug('Starting metalsmith-prism plugin');
     debug('Options:', opts);
 

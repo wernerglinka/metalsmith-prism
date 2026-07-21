@@ -1,3 +1,4 @@
+import { describe, it } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
@@ -56,10 +57,7 @@ const getCodeContent = (html) => {
     .trim();
 };
 
-describe('metalsmith-prism (ESM)', function () {
-  // Set timeout for all tests
-  this.timeout(10000);
-
+describe('metalsmith-prism (ESM)', () => {
   // Verify ESM module loading
   it('should be importable as an ES module', () => {
     assert.strictEqual(typeof metalsmithPrism, 'function', 'Plugin should be a function when imported with ESM');
@@ -67,7 +65,7 @@ describe('metalsmith-prism (ESM)', function () {
   });
 
   describe('Basic Syntax Highlighting', () => {
-    it('should highlight code blocks for json, markup, ruby, and bash', (done) => {
+    it('should highlight code blocks for json, markup, ruby, and bash', (_t, done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal.use(metalsmithPrism()).build((err) => {
@@ -94,7 +92,7 @@ describe('metalsmith-prism (ESM)', function () {
       });
     });
 
-    it('should NOT highlight unknown language code blocks', (done) => {
+    it('should NOT highlight unknown language code blocks', (_t, done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal.use(metalsmithPrism()).build((err) => {
@@ -119,7 +117,7 @@ describe('metalsmith-prism (ESM)', function () {
   });
 
   describe('Language Preloading', () => {
-    it('should pre-load and register language components for java, and then highlight code block for scala', (done) => {
+    it('should pre-load and register language components for java, and then highlight code block for scala', (_t, done) => {
       const metal = metalsmith(getFixturePath('preload')());
 
       metal
@@ -150,7 +148,7 @@ describe('metalsmith-prism (ESM)', function () {
   });
 
   describe('PHP Support', () => {
-    it('should highlight basic PHP code blocks correctly', (done) => {
+    it('should highlight basic PHP code blocks correctly', (_t, done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal
@@ -179,7 +177,7 @@ describe('metalsmith-prism (ESM)', function () {
         });
     });
 
-    it('should highlight advanced PHP features correctly', (done) => {
+    it('should highlight advanced PHP features correctly', (_t, done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal
@@ -211,7 +209,7 @@ describe('metalsmith-prism (ESM)', function () {
   });
 
   describe('HTML Features', () => {
-    it('should decode markup blocks when options#decode is true', (done) => {
+    it('should decode markup blocks when options#decode is true', (_t, done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal
@@ -240,7 +238,7 @@ describe('metalsmith-prism (ESM)', function () {
         });
     });
 
-    it('should add language class to <pre> tag', (done) => {
+    it('should add language class to <pre> tag', (_t, done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal.use(metalsmithPrism()).build((err) => {
@@ -263,7 +261,7 @@ describe('metalsmith-prism (ESM)', function () {
       });
     });
 
-    it('should add line numbers class to <pre> tag when options#lineNumbers is true', (done) => {
+    it('should add line numbers class to <pre> tag when options#lineNumbers is true', (_t, done) => {
       const metal = metalsmith(getFixturePath('markup')());
 
       metal

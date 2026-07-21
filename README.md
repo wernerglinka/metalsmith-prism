@@ -1,34 +1,26 @@
 # metalsmith-prism
 
-A Metalsmith plugin that **adds Prism specific HTML markup** to code sections for syntax coloring. Now with full dual module support for both **ESM** and **CommonJS** environments.
+A Metalsmith plugin that **adds Prism specific HTML markup** to code sections for syntax coloring.
 
 [![metalsmith:plugin][metalsmith-badge]][metalsmith-url]
 [![npm: version][npm-badge]][npm-url]
 [![license: MIT][license-badge]][license-url]
 [![coverage][coverage-badge]][coverage-url]
-[![ESM/CommonJS][modules-badge]][npm-url]
+[![ESM][modules-badge]][npm-url]
 
-## Dual Module Support (ESM and CommonJS)
-
-This plugin supports both ESM and CommonJS environments with no configuration needed:
-
-- ESM: `import prism from 'metalsmith-prism'`
-- CommonJS: `const prism = require('metalsmith-prism')`
-
-The package detects your environment automatically and provides the appropriate module format. This makes it compatible with both modern ESM projects and legacy CommonJS codebases.
+This package is **ESM-only** and requires Node >= 22. CommonJS projects on Node 22 can still consume it with `require('metalsmith-prism')` thanks to Node's `require(esm)` support.
 
 While this plugin adds all the required Prism HTML markup, **prism.css** must be included on the page to provide the syntax coloring. The plugin:
 
-- Supports both ESM and CommonJS environments
 - Automatically handles language dependencies
 - Supports HTML entity decoding
 - Can add line numbers
 - Works seamlessly with Markdown code blocks
-- Supports all Prism.js language
+- Supports all Prism.js languages
 
 ## Requirements
 
-- Node `>= 18.0.0`
+- Node `>= 22.0.0`
 - Metalsmith `>= v2.6.0`
 
 ## Quick Start
@@ -41,7 +33,7 @@ While this plugin adds all the required Prism HTML markup, **prism.css** must be
 Example using all features:
 
 ```javascript
-metalsmith(__dirname).use(
+metalsmith(import.meta.dirname).use(
   prism({
     decode: true, // Decode HTML entities
     lineNumbers: true, // Show line numbers
@@ -84,44 +76,21 @@ The css files can be downloaded from the [Prism website](https://prismjs.com/dow
 
 ### Add `metalsmith-prism` plugin to metalsmith
 
-**ESM:**
-
 ```js
 import Metalsmith from 'metalsmith';
 import prism from 'metalsmith-prism';
 
-Metalsmith(__dirname).use(prism()).build();
-```
-
-**CommonJS:**
-
-```js
-const Metalsmith = require('metalsmith');
-const prism = require('metalsmith-prism');
-
-Metalsmith(__dirname).use(prism()).build();
+Metalsmith(import.meta.dirname).use(prism()).build();
 ```
 
 ### To use with Markdown code blocks rendered by [@metalsmith/markdown](https://github.com/metalsmith/markdown)
-
-**ESM:**
 
 ```js
 import Metalsmith from 'metalsmith';
 import markdown from '@metalsmith/markdown';
 import prism from 'metalsmith-prism';
 
-Metalsmith(__dirname).use(markdown()).use(prism()).build();
-```
-
-**CommonJS:**
-
-```js
-const Metalsmith = require('metalsmith');
-const markdown = require('@metalsmith/markdown');
-const prism = require('metalsmith-prism');
-
-Metalsmith(__dirname).use(markdown()).use(prism()).build();
+Metalsmith(import.meta.dirname).use(markdown()).use(prism()).build();
 ```
 
 ## Language support
@@ -137,7 +106,7 @@ Supports all programming languages that have a corresponding Prism.js component 
 Always decode the html entities when processing language of type `markup`
 
 ```js
-Metalsmith(__dirname).use(
+Metalsmith(import.meta.dirname).use(
   prism({
     decode: true
   })
@@ -149,7 +118,7 @@ Metalsmith(__dirname).use(
 Adds the additional HTML markup so line numbers can be added via the line-numbers CSS.
 
 ```javascript
-Metalsmith(__dirname).use(
+Metalsmith(import.meta.dirname).use(
   prism({
     lineNumbers: true
   })
@@ -163,7 +132,7 @@ Pre-loads language component(s), such that each language component registers its
 Useful for loading syntax that extends other language components that are not automatically registered by Prism
 
 ```javascript
-Metalsmith(__dirname).use(
+Metalsmith(import.meta.dirname).use(
   prism({
     preLoad: ['java', 'scala']
   })
@@ -199,7 +168,7 @@ console<span class="token punctuation">.</span><span class="token function">log<
 Enable line numbers for longer code examples:
 
 ```javascript
-metalsmith(__dirname)
+metalsmith(import.meta.dirname)
   .use(
     prism({
       lineNumbers: true
@@ -228,7 +197,7 @@ def fibonacci(n):
 **Build configuration:**
 
 ```javascript
-metalsmith(__dirname)
+metalsmith(import.meta.dirname)
   .use(markdown())
   .use(
     prism({
@@ -243,7 +212,7 @@ metalsmith(__dirname)
 For better performance with known languages, preload them:
 
 ```javascript
-metalsmith(__dirname)
+metalsmith(import.meta.dirname)
   .use(
     prism({
       preLoad: ['python', 'ruby', 'go', 'rust']
@@ -257,7 +226,7 @@ metalsmith(__dirname)
 For code with HTML entities, use the decode option:
 
 ```javascript
-metalsmith(__dirname)
+metalsmith(import.meta.dirname)
   .use(
     prism({
       decode: true // Properly handle &lt;, &gt;, &amp; etc.
@@ -291,7 +260,7 @@ Add `metalsmith-prism` key to your `metalsmith.json` plugins key
 
 ## Test Coverage
 
-This project maintains high statement and line coverage for the source code. Coverage is verified during the release process using the c8 coverage tool.
+This project maintains high statement and line coverage for the source code. Coverage is measured with Node's native test runner (`node --test --experimental-test-coverage`).
 
 ## Credits
 
@@ -310,4 +279,4 @@ Code released under [the MIT license](https://github.com/wernerglinka/metalsmith
 [license-url]: LICENSE
 [coverage-badge]: https://img.shields.io/badge/test%20coverage-93%25-brightgreen
 [coverage-url]: #test-coverage
-[modules-badge]: https://img.shields.io/badge/modules-ESM%2FCJS-blue
+[modules-badge]: https://img.shields.io/badge/module-ESM-blue

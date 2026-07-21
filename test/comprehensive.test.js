@@ -1,5 +1,4 @@
-/* global describe, it */
-
+import { describe, it } from 'node:test';
 import { strict as assert } from 'node:assert';
 import { load } from 'cheerio';
 import { fileURLToPath } from 'node:url';
@@ -11,12 +10,9 @@ import metalsmithPrism from '../src/index.js';
 // Get current directory for ES modules
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-describe('metalsmith-prism comprehensive tests', function() {
-  // Set timeout for all tests
-  this.timeout(15000);
-
+describe('metalsmith-prism comprehensive tests', () => {
   describe('Real-world Usage Scenarios', () => {
-    it('should process multiple code blocks with different languages in one file', (done) => {
+    it('should process multiple code blocks with different languages in one file', (_t, done) => {
       // Create files object with test content
       const files = {
         'multiple.html': {
@@ -28,14 +24,16 @@ describe('metalsmith-prism comprehensive tests', function() {
           `)
         }
       };
-      
+
       // Create metalsmith instance and run plugin directly
       const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const result = files['multiple.html'].contents.toString();
         assert.ok(result.includes('token keyword'), 'JS highlighting');
         assert.ok(result.includes('token property'), 'CSS highlighting');
@@ -44,7 +42,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       });
     });
 
-    it('should correctly apply multiple options together', (done) => {
+    it('should correctly apply multiple options together', (_t, done) => {
       const files = {
         'combined-options.html': {
           contents: Buffer.from(`
@@ -52,18 +50,20 @@ describe('metalsmith-prism comprehensive tests', function() {
           `)
         }
       };
-      
+
       const plugin = metalsmithPrism({
         decode: true,
         lineNumbers: true,
         preLoad: ['markup']
       });
-      
+
       const metalsmith = Metalsmith(__dirname);
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const result = files['combined-options.html'].contents.toString();
         assert.ok(result.includes('line-numbers'), 'Line numbers added');
         assert.ok(result.includes('token tag'), 'Highlighting applied');
@@ -72,32 +72,32 @@ describe('metalsmith-prism comprehensive tests', function() {
       });
     });
 
-    it('should handle large code blocks efficiently', function(done) {
-      this.timeout(15000); // Increase timeout for this test
-      
+    it('should handle large code blocks efficiently', (_t, done) => {
       // Generate a large code block (1000+ lines should be enough for testing)
       let largeCode = '';
       for (let i = 0; i < 1000; i++) {
         largeCode += `const var${i} = ${i};\n`;
       }
-      
+
       const files = {
         'large.html': {
           contents: Buffer.from(`<pre><code class="language-javascript">${largeCode}</code></pre>`)
         }
       };
-      
+
       const plugin = metalsmithPrism();
-      
+
       const start = process.hrtime.bigint();
       const metalsmith = Metalsmith(__dirname);
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const end = process.hrtime.bigint();
         const timeMs = Number(end - start) / 1_000_000;
-        
+
         // Should complete in reasonable time (adjust threshold as needed)
         assert.ok(timeMs < 5000, `Expected ${timeMs}ms to be less than 5000ms`);
         // Check for token class in the output
@@ -109,22 +109,24 @@ describe('metalsmith-prism comprehensive tests', function() {
   });
 
   describe('Line Numbering Features', () => {
-    it('should generate correct number of line placeholders', (done) => {
-      const multilineCode = "line1\nline2\nline3\nline4\nline5";
-      
+    it('should generate correct number of line placeholders', (_t, done) => {
+      const multilineCode = 'line1\nline2\nline3\nline4\nline5';
+
       const files = {
         'line-count.html': {
           contents: Buffer.from(`<pre><code class="language-javascript">${multilineCode}</code></pre>`)
         }
       };
-      
+
       const plugin = metalsmithPrism({ lineNumbers: true });
-      
+
       const metalsmith = Metalsmith(__dirname);
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const result = files['line-count.html'].contents.toString();
         const $ = load(result);
         const lineRows = $('.line-numbers-rows span');
@@ -135,22 +137,24 @@ describe('metalsmith-prism comprehensive tests', function() {
       });
     });
 
-    it('should handle code with no line breaks correctly', (done) => {
-      const singleLineCode = "const x = 1;";
-      
+    it('should handle code with no line breaks correctly', (_t, done) => {
+      const singleLineCode = 'const x = 1;';
+
       const files = {
         'single-line.html': {
           contents: Buffer.from(`<pre><code class="language-javascript">${singleLineCode}</code></pre>`)
         }
       };
-      
+
       const plugin = metalsmithPrism({ lineNumbers: true });
-      
+
       const metalsmith = Metalsmith(__dirname);
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const result = files['single-line.html'].contents.toString();
         const $ = load(result);
         const lineRows = $('.line-numbers-rows span');
@@ -163,7 +167,7 @@ describe('metalsmith-prism comprehensive tests', function() {
   });
 
   describe('Context Sensitivity', () => {
-    it('should only process code blocks within pre tags', (done) => {
+    it('should only process code blocks within pre tags', (_t, done) => {
       const files = {
         'context.html': {
           contents: Buffer.from(`
@@ -172,13 +176,15 @@ describe('metalsmith-prism comprehensive tests', function() {
           `)
         }
       };
-      
+
       const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const result = files['context.html'].contents.toString();
         const $ = load(result);
 
@@ -191,7 +197,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       });
     });
 
-    it('should handle pre tags without language class', (done) => {
+    it('should handle pre tags without language class', (_t, done) => {
       const files = {
         'no-language-pre.html': {
           contents: Buffer.from(`
@@ -200,13 +206,15 @@ describe('metalsmith-prism comprehensive tests', function() {
           `)
         }
       };
-      
+
       const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const result = files['no-language-pre.html'].contents.toString();
         const $ = load(result);
 
@@ -219,7 +227,7 @@ describe('metalsmith-prism comprehensive tests', function() {
   });
 
   describe('Complex Code Examples', () => {
-    it('should correctly highlight complex real-world JavaScript', (done) => {
+    it('should correctly highlight complex real-world JavaScript', (_t, done) => {
       const complexJs = `
         class Example extends Base {
           constructor(options = {}) {
@@ -237,19 +245,21 @@ describe('metalsmith-prism comprehensive tests', function() {
           }
         }
       `;
-      
+
       const files = {
         'complex-js.html': {
           contents: Buffer.from(`<pre><code class="language-javascript">${complexJs}</code></pre>`)
         }
       };
-      
+
       const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const result = files['complex-js.html'].contents.toString();
 
         // Should highlight classes, keywords, etc.
@@ -260,7 +270,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       });
     });
 
-    it('should correctly highlight complex real-world CSS', (done) => {
+    it('should correctly highlight complex real-world CSS', (_t, done) => {
       const complexCss = `
         .component {
           display: flex;
@@ -283,19 +293,21 @@ describe('metalsmith-prism comprehensive tests', function() {
           }
         }
       `;
-      
+
       const files = {
         'complex-css.html': {
           contents: Buffer.from(`<pre><code class="language-css">${complexCss}</code></pre>`)
         }
       };
-      
+
       const metalsmith = Metalsmith(__dirname);
       const plugin = metalsmithPrism();
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const result = files['complex-css.html'].contents.toString();
 
         // Should highlight selectors, properties, functions, etc.
@@ -306,7 +318,7 @@ describe('metalsmith-prism comprehensive tests', function() {
       });
     });
 
-    it('should correctly highlight complex real-world HTML', (done) => {
+    it('should correctly highlight complex real-world HTML', (_t, done) => {
       const complexHtml = `
         <!DOCTYPE html>
         <html lang="en">
@@ -338,22 +350,24 @@ describe('metalsmith-prism comprehensive tests', function() {
         </body>
         </html>
       `;
-      
+
       const files = {
         'complex-html.html': {
           contents: Buffer.from(`<pre><code class="language-markup">${complexHtml}</code></pre>`)
         }
       };
-      
+
       const plugin = metalsmithPrism({
-        decode: true  // HTML examples often need decoding
+        decode: true // HTML examples often need decoding
       });
-      
+
       const metalsmith = Metalsmith(__dirname);
-      
+
       plugin(files, metalsmith, (err) => {
-        if (err) {return done(err);}
-        
+        if (err) {
+          return done(err);
+        }
+
         const result = files['complex-html.html'].contents.toString();
 
         // Should highlight tags, attributes, etc.

@@ -1,0 +1,35 @@
+name: Test matrix
+
+# Runs the test suite against multiple Node.js versions on pull requests.
+# The main `test.yml` workflow handles single-version testing on push to main
+# and owns the coverage badge update; this workflow only verifies that the
+# code works across the supported Node.js range. Drop a Node version here
+# only after dropping it from `engines.node` in package.json.
+
+on:
+  pull_request:
+    branches: [main, master]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ['22.x', '24.x']
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js $NaN
+        uses: actions/setup-node@v4
+        with:
+          node-version: $NaN
+          cache: 'npm'
+      - run: npm install
+      - name: Lint
+        run: npm run lint:check
+      - name: Run tests
+        run: npm test
